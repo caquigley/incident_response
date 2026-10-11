@@ -1,0 +1,1867 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Quaternary faults and folds in Alaska: A digital database</title>
+  <link rel="schema.dc" href="http://purl.org/metadata/dublin_core"/>
+  <meta name="dc.title" content="Quaternary faults and folds in Alaska: A digital database "/>
+  <meta name="dc.creator" content="Koehler, R.D. Farrell, Rebecca-Ellen Burns, P.A.C. Combellick, R.A. "/>
+  <meta name="dc.subject" content="geoscientificInformation "/>
+  <meta name="dc.description" content="This dataset contains information and locations on faults and associated folds in Alaska that are believed to be sources of M&gt;6 earthquakes during the Quaternary (the past 1,600,000 years). The dataset is intended to part of the USGS archive for historic and ancient earthquake sources used in current and future probabilistic seismic-hazard analyses. This dataset presents a single source that summarizes important information on paleoseismic (ancient earthquakes) parameters including, age of most recent deformation, slip rate, slip sense dip direction, and accuracy of original mapping. These data are compiled from hundreds of journal articles, maps, theses, and other documents, as referenced herein. The geospatial data coverage for the state of Alaska is designed to serve a variety of needs, both in terms of the user community and methods of delivering the data. "/>
+  <meta name="dc.publisher" content="Metadata manager"/>
+  <meta name="dc.contributor" content="The authors extend gratitude to many staff members of the Division of Geological &amp; Geophysical Surveys who assisted in one way or another in the compilation of the database. Countless hours of map and literature data gathering and scanning were performed by Cheryl Cameron, Carol Gallo, and Jessica Mayer. Jim Weakland designed the ArcGIS server to host the data on-line and Ken Woods assisted in building the computer infrastructure to make the on-line interface possible. Simone Montayne assisted with metadata. Partial funding was provided by the U.S. Geological Survey National Earthquake Hazards Reduction Program (Grant #03WRAG0027) and the State of Alaska, Division of Homeland Security and Emergency Management, Earthquake Hazards Reduction State Assistance Program (Grant #39320/39507). Several members of the U.S. Geological survey were instrumental in bringing this project to fruition, including Kathy Haller, Tony Crone, George Plafker, and Mike Machette. Constructive reviews of the database by Peter Haeussler and Rob Witter (U.S. Geological Survey, Anchorage) improved the content. "/>
+  <meta name="dc.date" content="2012"/>
+  <meta name="dc.type" content="data.document, map"/>
+  <meta name="dc.format" content="SHP"/>
+  <meta name="dc.identifier" content="http://www.dggs.alaska.gov/pubs/id/23944"/>
+  <meta name="dc.source" content="MP 141"/>
+  <meta name="dc.lang" content="en"/>
+  <meta name="dc.coverage.x.min" scheme="DD" content="164.065994"/>
+  <meta name="dc.coverage.x.max" scheme="DD" content="-134.070002"/>
+  <meta name="dc.coverage.y.min" scheme="DD" content="50.369864"/>
+  <meta name="dc.coverage.y.max" scheme="DD" content="70.751657"/>
+  <meta name="dc.coverage.placeName" content="Alaska, State of"/>
+  <meta name="dc.coverage.t.min" content="2002"/>
+  <meta name="dc.coverage.t.max" content="2012"/>
+  <meta name="dc.coverage.periodName" content="Quaternary"/>
+  <meta name="dc.rights" content="Access constraints: This report, map, and/or dataset is available directly from the State of Alaska, Department of Natural Resources, Division of Geological &amp; Geophysical Surveys (see contact information below).; Use constraints: Any hard copies or published datasets utilizing these datasets shall clearly indicate their source. If the user has modified the data in any way, the user is obligated to describe the types of modifications the user has made. The user specifically agrees not to misrepresent these datasets, nor to imply that changes made by the user were approved by the State of Alaska, Department of Natural Resources, Division of Geological &amp; Geophysical Surveys. The State of Alaska makes no express or implied warranties (including warranties for merchantability and fitness) with respect to the character, functions, or capabilities of the electronic data or products or their appropriateness for any user's purposes. In no event will the State of Alaska be liable for any incidental, indirect, special, consequential, or other damages suffered by the user or any other person or entity whether from the use of the electronic services or products or any failure thereof or otherwise. In no event will the State of Alaska's liability to the Requestor or anyone else exceed the fee paid for the electronic service or product."/>
+</head>
+<body>
+<h1>Quaternary faults and folds in Alaska: A digital database</h1>
+Metadata also available as - [<a href="MP141.txt">Parseable text</a>] - [<a href="MP141.xml">XML</a>]<p>
+<h4>Frequently-anticipated questions:</h4>
+<ul>
+  <li><a href="#what">What does this data set describe?</a>
+    <ol>
+      <li><a href="#what.1">How should this data set be cited?</a></li>
+      <li><a href="#what.2">What geographic area does the data set cover?</a></li>
+      <li><a href="#what.3">What does it look like?</a></li>
+      <li><a href="#what.4">Does the data set describe conditions during a particular time period?</a></li>
+      <li><a href="#what.5">What is the general form of this data set?</a></li>
+      <li><a href="#what.6">How does the data set represent geographic features?</a></li>
+      <li><a href="#what.7">How does the data set describe geographic features?</a></li>
+    </ol>
+  </li>
+  <li><a href="#who">Who produced the data set?</a>
+    <ol>
+      <li><a href="#who.1">Who are the originators of the data set?</a></li>
+      <li><a href="#who.2">Who also contributed to the data set?</a></li>
+      <li><a href="#who.3">To whom should users address questions about the data?</a></li>
+    </ol>
+  </li>
+  <li><a href="#why">Why was the data set created?</a></li>
+  <li><a href="#how">How was the data set created?</a>
+    <ol>
+      <li><a href="#how.1">From what previous works were the data drawn?</a></li>
+      <li><a href="#how.2">How were the data generated, processed, and modified?</a></li>
+      <li><a href="#how.3">What similar or related data should the user be aware of?</a></li>
+    </ol>
+  </li>
+  <li><a href="#quality">How reliable are the data; what problems remain in the data set?</a>
+    <ol>
+      <li><a href="#quality.1">How well have the observations been checked?</a></li>
+      <li><a href="#quality.2">How accurate are the geographic locations?</a></li>
+      <li><a href="#quality.3">How accurate are the heights or depths?</a></li>
+      <li><a href="#quality.4">Where are the gaps in the data?  What is missing?</a></li>
+      <li><a href="#quality.5">How consistent are the relationships among the data, including topology?</a></li>
+    </ol>
+  </li>
+  <li><a href="#getacopy">How can someone get a copy of the data set?</a>
+    <ol>
+      <li><a href="#getacopy.0">Are there legal restrictions on access or use of the data?</a></li>
+      <li><a href="#getacopy.1">Who distributes the data?</a></li>
+      <li><a href="#getacopy.2">What's the catalog number I need to order this data set?</a></li>
+      <li><a href="#getacopy.3">What legal disclaimers am I supposed to read?</a></li>
+      <li><a href="#getacopy.4">How can I download or order the data?</a></li>
+    </ol>
+  </li>
+  <li><a href="#metaref">Who wrote the metadata?</a></li>
+</ul>
+<hr/>
+<h3><a name="what">What does this data set describe?</a></h3>
+<div style="margin-left: 2em">
+<dl>
+<dt><em>Title:</em>  Quaternary faults and folds in Alaska: A digital database</dt>
+<dt><em>Abstract:</em>  
+<dd>
+
+This dataset contains information and locations on faults and associated folds in Alaska that are believed to be sources of M&gt;6 earthquakes during the Quaternary (the past 1,600,000 years). The dataset is intended to part of the USGS archive for historic and ancient earthquake sources used in current and future probabilistic seismic-hazard analyses. This dataset presents a single source that summarizes important information on paleoseismic (ancient earthquakes) parameters including, age of most recent deformation, slip rate, slip sense dip direction, and accuracy of original mapping. These data are compiled from hundreds of journal articles, maps, theses, and other documents, as referenced herein. The geospatial data coverage for the state of Alaska is designed to serve a variety of needs, both in terms of the user community and methods of delivering the data.
+
+</dd>
+<dt><em>Supplemental_Information:</em>  
+<dd>
+
+References for the fault traces and information regarding the digitizing process are recorded under Lineage section of this metadata file and in the text report that accompanies this publication release. The DGGS metadata standard extends the FGDC standard to include elements that are required to facilitate our internal data management. These elements, referred to as &quot;layers,&quot; group and describe files that have intrinsic logical or topological relationships. This dataset is described as a single layer. Attribute information for the layer is included in this metadata file under the &quot;Entity_and_Attribute_Information&quot; section. The layer is titled:      
+            &gt;qflt-line-alaska:    Quaternary faults throughout the state of Alaska
+
+</dd>
+</dl>
+</div>
+<ol>
+<li><a name="what.1"><b>How should this data set be cited?</b></a><p>
+<blockquote>
+Koehler, R.D., Farrell, Rebecca-Ellen, Burns, P.A.C., and Combellick, R.A., 2012, Quaternary faults and folds in Alaska: A digital database: Miscellaneous Publication MP 141, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/23944">&lt;http://www.dggs.alaska.gov/pubs/id/23944&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  31 p., 1 sheet, scale 1:3,700,000.</dt>
+</dl>
+<p>
+</li>
+<li><a name="what.2"><b>What geographic area does the data set cover?</b></a><p>
+<dl>
+<dt><em>West_Bounding_Coordinate:</em>  164.065994</dt>
+<dt><em>East_Bounding_Coordinate:</em>  -134.070002</dt>
+<dt><em>North_Bounding_Coordinate:</em>  70.751657</dt>
+<dt><em>South_Bounding_Coordinate:</em>  50.369864</dt>
+</dl>
+<p>
+</li>
+<li><a name="what.3"><b>What does it look like?</b></a><p>
+<p>
+</li>
+<li><a name="what.4"><b>Does the data set describe conditions during a particular time period?</b></a><p>
+<dl>
+<dt>Beginning_Date: 2002<dt>Ending_Date: 2012<dt><em>Currentness_Reference:</em>  publication date</dt>
+</dl>
+<p>
+</li>
+<li><a name="what.5"><b>What is the general form of this data set?</b></a><p>
+<dl>
+<dt><em>Geospatial_Data_Presentation_Form:</em>  document, map</dt>
+</dl>
+<p>
+</li>
+<li><a name="what.6"><b>How does the data set represent geographic features?</b></a><p>
+<ol type="a">
+<li><a name="what.6.a"><b>How are geographic features stored in the data set?</b></a><p>
+This is a Vector data set.
+<p>
+</li>
+<li><a name="what.6.b"><b>What coordinate system is used to represent geographic features?</b></a><p>
+The horizontal datum used is World Geodetic System of 1984.<br/>
+The ellipsoid used is World Geodetic System of 1984.<br/>
+The semi-major axis of the ellipsoid used is 6378137.<br/>
+The flattening of the ellipsoid used is 1/298.257223563.<br/>
+<p>
+</li>
+</ol>
+<p>
+</li>
+<li><a name="what.7"><b>How does the data set describe geographic features?</b></a><p>
+<dl>
+<dt><b><tt>mp141-qflt-line-alaska</tt></b><dd>Quaternary faults throughout the state of Alaska
+  (Source: Alaska Division of Geological &amp; Geophysical Surveys)
+<p>
+<dl>
+<dt><b><tt>NAME</tt></b><dd>name of the geologic structure, includes section name and other modifiers, i.e., Denali fault, Holitna section when applicable.
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<em>
+see this report, APPENDIX A - Alphabetical reference list for digitized fault and fold traces, for complete reference list
+</em>
+<p>
+<dt><b><tt>CODE</tt></b><dd>a three-integer field that defines certainty or reliability of field mapping
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<em>
+CODE is a three-integer field that defines certainty or reliability of field mapping (FCODE, integer one), time of most recent movement (ACODE, integer two), and amount or rate of slip (SLIPCODE, integer three). CODE determines the line type (fault trace) to be plotted.
+</em>
+<p>
+<dt><b><tt>NUM</tt></b><dd>unique number for each fault or fold.
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<em>
+NUM is a unique number for each fault or fold. A letter is added to the end of the number for faults that have clearly defined sections. At this time the Alaska numbers do not correlate with the six-character unique USGS identifier system previously developed for the national fault database that defines a fault or section id.
+</em>
+<p>
+<dt><b><tt>AGE</tt></b><dd>the upper bounding time of the most recent surface-deforming earthquake
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">&lt;150</td><td>historic
+</td></tr>
+<tr><td valign="top">&lt;15,000</td><td>post glacial
+</td></tr>
+<tr><td valign="top">&lt;130,000</td><td>late Quaternary
+</td></tr>
+<tr><td valign="top">&lt;750,000</td><td>middle and late Quaternary
+</td></tr>
+<tr><td valign="top">&lt;1,600,000</td><td>Quaternary
+</td></tr>
+<tr><td valign="top">Class B</td><td>Questionable or suspected structures
+</td></tr>
+</table>
+<p>
+<dt><b><tt>ACODE</tt></b><dd>the second integer in CODE and defines the upper bounding time of the most recent surface-deforming earthquake.
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">1</td><td>historic
+</td></tr>
+<tr><td valign="top">2</td><td>post glacial
+</td></tr>
+<tr><td valign="top">3</td><td>late Quaternary
+</td></tr>
+<tr><td valign="top">4</td><td>middle and late Quaternary
+</td></tr>
+<tr><td valign="top">5</td><td>Quaternary
+</td></tr>
+<tr><td valign="top">6</td><td>Questionable or suspected structures
+</td></tr>
+</table>
+<p>
+<dt><b><tt>SLIPRATE</tt></b><dd>the assigned slip rate category
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">&gt;5</td><td>greater than 5 mm/year
+</td></tr>
+<tr><td valign="top">1-5</td><td>1-5 mm/year
+</td></tr>
+<tr><td valign="top">0.2-1</td><td>0.2-1 mm/year
+</td></tr>
+<tr><td valign="top">&lt;0.2</td><td>less than 0.2 mm/year
+</td></tr>
+<tr><td valign="top">unknown</td><td>cannot be determined using geologic reasoning
+</td></tr>
+</table>
+<p>
+<dt><b><tt>SLIPCODE</tt></b><dd>SLIPCODE is the third integer in CODE and defines the assigned slip rate category.
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">1</td><td>greater than 5 mm/year
+</td></tr>
+<tr><td valign="top">2</td><td>1-5 mm/year
+</td></tr>
+<tr><td valign="top">3</td><td>0.2-1 mm/year
+</td></tr>
+<tr><td valign="top">4</td><td>less than 0.2 mm/year
+</td></tr>
+<tr><td valign="top">5</td><td>cannot be determined using geologic reasoning
+</td></tr>
+</table>
+<p>
+<dt><b><tt>SLIPSENSE</tt></b><dd>type of relative fault or fold movement
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">NULL</td><td>empty value, slip-sense is not applicable to the structure
+</td></tr>
+<tr><td valign="top">unk</td><td>slip-sense is unknown
+</td></tr>
+<tr><td valign="top">N</td><td>normal
+</td></tr>
+<tr><td valign="top">R</td><td>reverse
+</td></tr>
+<tr><td valign="top">SS</td><td>strike slip
+</td></tr>
+<tr><td valign="top">T</td><td>thrust
+</td></tr>
+</table>
+<p>
+<dt><b><tt>DIPDIRECTI</tt></b><dd>Dip direction for the ENTIRE FAULT OR FAULT SECTION, in cases where a single structure is known to have back thrusts and forethrusts, the dip direction is specific to the line segment record
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">NULL</td><td>empty value, dip direction is not applicable to the structure
+</td></tr>
+<tr><td valign="top">unknown</td><td>dip direction is unknown
+</td></tr>
+<tr><td valign="top">East</td><td>dip direction is East
+</td></tr>
+<tr><td valign="top">North</td><td>dip direction is North
+</td></tr>
+<tr><td valign="top">Northeast</td><td>dip direction is Northeast
+</td></tr>
+<tr><td valign="top">Northwest</td><td>dip direction is Northwest
+</td></tr>
+<tr><td valign="top">Northwest,South</td><td>dip direction is Northwest, South
+</td></tr>
+<tr><td valign="top">South</td><td>dip direction is South
+</td></tr>
+<tr><td valign="top">Southeast</td><td>dip direction is Southeast
+</td></tr>
+<tr><td valign="top">Southwest</td><td>dip direction is Southwest
+</td></tr>
+<tr><td valign="top">vertical</td><td>dip direction is vertical
+</td></tr>
+<tr><td valign="top">vertical, North</td><td>dip direction is vertical, North
+</td></tr>
+<tr><td valign="top">West</td><td>dip direction is West
+</td></tr>
+</table>
+<p>
+<dt><b><tt>FCODE</tt></b><dd>The first integer in CODE and defines how well the fault is located and expressed in the landscape
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">1</td><td>fault landforms are more continuous than discontinuous and mapping is accurate at given &quot;MAPPEDSCAL&quot; value
+</td></tr>
+<tr><td valign="top">2</td><td>fault landforms are more discontinuous than continuous and mapping is accurate at given &quot;MAPPEDSCAL&quot; value
+</td></tr>
+<tr><td valign="top">3</td><td>location of fault is inferred
+</td></tr>
+</table>
+<p>
+<dt><b><tt>FTYPE</tt></b><dd>defines how well the fault is located and expressed in the landscape
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">Well Constrained</td><td>fault landforms are more continuous than discontinuous and mapping is accurate at given &quot;MAPPEDSCAL&quot; value
+</td></tr>
+<tr><td valign="top">Moderately Constrained</td><td>fault landforms are more discontinuous than continuous and mapping is accurate at given &quot;MAPPEDSCAL&quot; value
+</td></tr>
+<tr><td valign="top">Inferred</td><td>location of fault is inferred
+</td></tr>
+</table>
+<p>
+<dt><b><tt>MAPPEDSCAL</tt></b><dd>Mapped scale will control visualization of the fault at various scales.
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">24</td><td>1:24,000, fault should be more continuous than discontinuous and mapping is accurate at &gt;10,000 scale.
+</td></tr>
+<tr><td valign="top">63</td><td>1:63,360, fault should be more continuous than discontinuous and mapping is accurate at &gt;24,000 scale.
+</td></tr>
+<tr><td valign="top">100</td><td>1:100,000, fault could be more discontinuous than continuous and mapping is accurate at &gt;50,000 scale.
+</td></tr>
+<tr><td valign="top">250</td><td>1:250,000, fault could be more discontinuous than continuous and mapping is accurate at &gt;1:125,000 scale.
+</td></tr>
+<tr><td valign="top">316</td><td>1:316,000, fault could be more discontinuous than continuous and mapping is accurate at &gt;1:158,000 scale.
+</td></tr>
+<tr><td valign="top">500</td><td>1:500,000, fault could be more discontinuous than continuous and mapping is accurate at &gt;1:250,000 scale.
+</td></tr>
+</table>
+<p>
+<dt><b><tt>SecondaryS</tt></b><dd>Secondary slip
+  (Source: U.S. Geological Survey)<p></p>
+<p>
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Value</th><th>Definition</th></tr>
+<tr><td valign="top">NULL</td><td>value is unknown or not applicable
+</td></tr>
+<tr><td valign="top">SS</td><td>strike-slip
+</td></tr>
+<tr><td valign="top">T</td><td>thrust
+</td></tr>
+<tr><td valign="top">R</td><td>reverse
+</td></tr>
+</table>
+<p>
+</dl>
+<p>
+</dl>
+<p>
+</li>
+</ol>
+<p>
+<hr/>
+<h3><a name="who">Who produced the data set?</a></h3>
+<ol>
+<li><a name="who.1"><b>Who are the originators of the data set?</b></a> (may include formal authors, digital compilers, and editors)<p>
+<ul>
+<li>Koehler, R.D.
+<li>Farrell, Rebecca-Ellen
+<li>Burns, P.A.C.
+<li>Combellick, R.A.
+</ul>
+<p>
+</li>
+<li><a name="who.2"><b>Who also contributed to the data set?</b></a><p>
+<blockquote>
+The authors extend gratitude to many staff members of the Division of Geological &amp; Geophysical Surveys who assisted in one way or another in the compilation of the database. Countless hours of map and literature data gathering and scanning were performed by Cheryl Cameron, Carol Gallo, and Jessica Mayer. Jim Weakland designed the ArcGIS server to host the data on-line and Ken Woods assisted in building the computer infrastructure to make the on-line interface possible. Simone Montayne assisted with metadata. Partial funding was provided by the U.S. Geological Survey National Earthquake Hazards Reduction Program (Grant #03WRAG0027) and the State of Alaska, Division of Homeland Security and Emergency Management, Earthquake Hazards Reduction State Assistance Program (Grant #39320/39507). Several members of the U.S. Geological survey were instrumental in bringing this project to fruition, including Kathy Haller, Tony Crone, George Plafker, and Mike Machette. Constructive reviews of the database by Peter Haeussler and Rob Witter (U.S. Geological Survey, Anchorage) improved the content.
+</blockquote>
+<p>
+</li>
+<li><a name="who.3"><b>To whom should users address questions about the data?</b></a><p>
+<div style="margin-left: 2em">
+Alaska Division of Geological &amp; Geophysical Surveys<br/>
+c/o James Weakland<br/>
+GIS Analyst<br/>
+3354 College Road<br/>
+Fairbanks, AK 99709-3707<br/>
+USA<br/>
+<p>
+(907)451-5029 (voice)<br/>
+dggsgis@alaska.gov<br/>
+<dl>
+<dt><em>Hours_of_Service:</em>  8 am to 4:30 pm, Monday through Friday, except State holidays</dt>
+</dl>
+</div>
+<p>
+</li>
+</ol>
+<hr/>
+<h3><a name="why">Why was the data set created?</a></h3>
+<blockquote>
+Alaska is the most seismically active region of the United States, however little information exists on the location, style of deformation, and slip rates of Quaternary faults. Thus, to provide an accurate, user-friendly, reference-based fault inventory to the public, we have produced a digital GIS shapefile of the Quaternary fault traces. Relevant information pertaining to the digital GIS shapefile is presented herein. This database will be useful for engineering geologic problems, geologic, geodetic, and seismic research, and policy planning. In addition, the GIS shapefile has been made in conformance with the standards defined by the U.S. Geological Survey and this data set will be incorporated into the National Quaternary fault and fold database.
+</blockquote>
+<p>
+<hr/>
+<h3><a name="how">How was the data set created?</a></h3>
+<ol>
+<li><a name="how.1"><b>From what previous works were the data drawn?</b></a><p>
+<dl>
+<dt><b>Von Huene, Roland and others, 1980</b> (source 1 of 54)
+<dd>
+<blockquote>
+Von Huene, Roland, Hampton, M.A., Fisher, M.A., Varchol, D.J., and Cochrane, G.R., 1980, Map showing near-surface geologic structures of Kodiak Shelf, Alaska: Miscellaneous Field Studies Map MF 1200, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/13020">&lt;http://www.dggs.alaska.gov/pubs/id/13020&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:500,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  500000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Albatross fault zone and Albatross Bank fault zone-anticline line work and all points are based on Von Huene, Roland and others, 1980. The Kodiak Shelf fault zone and Kodiak Shelf fault zone anticline line work and all points are based on Von Huene, Roland and others, 1980. Geologic line work on this map other than specified faults were not captured. Georegistration magnification is good at 1:63,360.
+
+</dd>
+</dl>
+<p>
+<dt><b>Till, A.B. and others, 1986</b> (source 2 of 54)
+<dd>
+<blockquote>
+Till, A.B., Dumoulin, J.A., Gamble, B.M., Kaufman, D.S., and Carroll, P.I., 1986, Preliminary geologic map and fossil data, Solomon, Bendeleben, and southern Kotzebue quadrangles, Seward Peninsula, Alaska: Open-File Report OF 86-276, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/11630">&lt;http://www.dggs.alaska.gov/pubs/id/11630&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  60 p., 3 sheets, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Bendeleben fault line work and all points are based on Till, A.B. and others, 1986. The Kigluaik fault line work and all points are based on Till, A.B. and others, 1986. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is good at 1:250,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Sainsbury, C.L. and others, 1969</b> (source 3 of 54)
+<dd>
+<blockquote>
+Sainsbury, C.L., Kachadoorian, Reuben, Hudson, Travis, Smith, T.E., Richards, T.R., and Todd, W.E., 1969, Reconnaissance geologic maps and sample data, Teller A-1, A-2, A-3, B-1, B-2, B-3, C-1, and Bendeleben A-6, B-6, C-6, D-5, D-6 quadrangles, Seward Peninsula, Alaska: Open-File Report OF 69-236, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/10827">&lt;http://www.dggs.alaska.gov/pubs/id/10827&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  49 p., 13 sheets, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Bendeleben fault line work and all points in Teller A-1, A-2 and Bendeleben A-6 are based on Sainsbury, C.L. and others, 1969. The Kigluaik fault line work and all points in Teller A-1, A-2 and Bendeleben A-6 are based on Sainsbury, C.L. and others, 1969. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:63,360.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bader, J.W. and Bird, K.J., 1986</b> (source 4 of 54)
+<dd>
+<blockquote>
+Bader, J.W., and Bird, K.J., 1986, Geologic map of the Demarcation Point, Mt. Michelson, Flaxman Island, and Barter Island quadrangles, northeastern Alaska: Miscellaneous Investigations Series Map I 1791, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12930">&lt;http://www.dggs.alaska.gov/pubs/id/12930&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Camden Bay fault, Camden anticline, and Marsh Creek anticline line work and all points are based on Bader, J.W. and Bird, K.J., 1986. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is good at 1:10,000,000. There is a void in map coverage due to the separate UTM zones, the fault position was adjusted to connect with the faults from the Bader map. Camden anticline and an unnamed fault were affected.
+
+</dd>
+</dl>
+<p>
+<dt><b>Labay, K.A. and Haeussler, P.J., 2001</b> (source 5 of 54)
+<dd>
+<blockquote>
+Labay, K.A., and Haeussler, P.J., 2001, GIS coverages of the Castle Mountain Fault, south central Alaska: Open-File Report OF 2001-504, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/14791">&lt;http://www.dggs.alaska.gov/pubs/id/14791&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Castle Mountain fault system including the Susitna section, Talkeetna West section, East section, Caribou fault, and East Boulder Creek fault line work and all points, except lineations, are based on Labay, K.A. and Haeussler, P.J., 2001.
+
+</dd>
+</dl>
+<p>
+<dt><b>Haeussler, P.J., 1998</b> (source 6 of 54)
+<dd>
+<blockquote>
+Haeussler, P.J., 1998, Surficial geologic map along the Castle Mountain Fault between Houston and Hatcher Pass Road, Alaska: Open-File Report OF 98-480, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/14769">&lt;http://www.dggs.alaska.gov/pubs/id/14769&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  4 p</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Castle Mountain fault system between Houston and Hatcher Pass Road line work and all points, except the limit of aerial photograph coverage and lineations, are based on Haeussler, P.J., 1998.
+
+</dd>
+</dl>
+<p>
+<dt><b>Wilson, F.H. and others, 1998</b> (source 7 of 54)
+<dd>
+<blockquote>
+Wilson, F.H., Dover, J.H., Bradley, D.C., Weber, F.R., Bundtzen, T.K., and Haeussler, P.J., 1998, Geologic map of Central (Interior) Alaska: Open-File Report OF 98-133-A, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/14822">&lt;http://www.dggs.alaska.gov/pubs/id/14822&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+After incorporating all of the listed Iditarod-Nixon fork faults maps, there was gap in the fault system and the void was filled with Wilson, F.H. and others, 1998.
+
+</dd>
+</dl>
+<p>
+<dt><b>Miller, D.J., 1971</b> (source 8 of 54)
+<dd>
+<blockquote>
+Miller, D.J., 1971, Geologic map of the Yakataga district, Gulf of Alaska tertiary province, Alaska: Miscellaneous Geologic Investigations Map I 610, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/13628">&lt;http://www.dggs.alaska.gov/pubs/id/13628&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  6 p., 1 sheet, scale 1:125,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  125000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Chugach-St. Elias Fold and Thrust belt line work and all points are based on Miller, D.J., 1971. Faults and folds include the Chugach-St. Elias fault, Sullivan fault, Coal Glacier fault, Chaix Hills fault, Hope Creek fault, Kosakuts fault, Boundary fault, Leeper syncline, Miller Creek fault, White River syncline, Yaga syncline, and Yakataga anticline. Geologic line work on this map other than specified faults and folds was not captured. Georegistration magnification is excellent at 1:100,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Beikman, H.M., 1974</b> (source 9 of 54)
+<dd>
+<blockquote>
+Beikman, H.M., 1974, Preliminary geologic map of the southeast quadrant of Alaska: Miscellaneous Field Studies Map MF 612, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/13257">&lt;http://www.dggs.alaska.gov/pubs/id/13257&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  2 sheets, scale 1:1,000,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  1000000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Chugach-St. Elias Fold and Thrust belt line work and all points are based on Beikman, H.M., 1974. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:1,000,000, 1:750,000 and good at 1:500,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Plafker, George, 1967</b> (source 10 of 54)
+<dd>
+<blockquote>
+Plafker, George, 1967, Geologic map of the Gulf of Alaska tertiary province, Alaska: Miscellaneous Geologic Investigations Map I 484, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/13622">&lt;http://www.dggs.alaska.gov/pubs/id/13622&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:500,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  500000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Chugach-St. Elias fold and thrust belt, Fairweather fault, Art Lewis Glacier fault, and Yakutat fault line work and all points are based on Plafker, George, 1967. For the Chugach-St. Elias fold and thrust belt, faults include the Malaspina fault and Bagley fault. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:500,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Winkler, G.R. and Plafker, George, 1993</b> (source 11 of 54)
+<dd>
+<blockquote>
+Winkler, G.R., and Plafker, George, 1993, Geologic map of the Cordova and Middleton Island quadrangles, Southern Alaska: Miscellaneous Investigations Series Map I 1984, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12911">&lt;http://www.dggs.alaska.gov/pubs/id/12911&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Cordova fault system, Ragged Mountain fault, Tenfathom fault, Wingham fault, and Kayak fault line work and all points are based on Winkler, G.R. and Plafker, George, 1993. Faults of the Cordova fault system include Rude River fault, Etches fault, Cordova fault, Heney fault, and Eyak fault. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:63,360, 1:24,000 and at 1:10,000. Note: The Rude River fault connects with the Bagley fault to the east.
+
+</dd>
+</dl>
+<p>
+<dt><b>Brosge, W.P. and others, 1973</b> (source 12 of 54)
+<dd>
+<blockquote>
+Brosge, W.P., Reiser, H.N., and Yeend, Warren, 1973, Reconnaissance geologic map of the Beaver Quadrangle, Alaska: Miscellaneous Field Studies Map MF 525, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12865">&lt;http://www.dggs.alaska.gov/pubs/id/12865&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Brosge, W.P. and others, 1973, is used as the base map for the Woodward-Lundgren map.
+
+</dd>
+</dl>
+<p>
+<dt><b>Haeussler, P.J. and Saltus, R.W., 2011</b> (source 13 of 54)
+<dd>
+<blockquote>
+Haeussler, P.J., and Saltus, R.W., 2011, Location and extent of Tertiary structures in Cook Inlet Basin, Alaska, and mantle dynamics that focus deformation and subsidence: Professional Paper P 1776-D, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/24045">&lt;http://www.dggs.alaska.gov/pubs/id/24045&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  26 p</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Lake Clark fault and Cook Inlet folds line work and all points are based on Haeussler, P.J. and Saltus, R.W., 2011. Cook Inlet folds digitized include the McArthur River-Redoubt Shoal, Beaver Creek, Beluga River, Big Lake North, Falls Creek-Ninilchik, Granite Point, Ivan River, Kasilof, Kenai-Cannery Loop, Lewis River, Middle Ground Shoal, Moquawkie, Nicolai Creek, North Cook Inlet - SRS, North Trading Bay, Pittman, Sterling, Stump Lake, Swanson River, Trading Bay, Wasilla St. No. 1-Needham, West Fork, and West Mcarthur River.
+
+</dd>
+</dl>
+<p>
+<dt><b>Hoare, J.M. and Coonrad, W.L., 1961</b> (source 14 of 54)
+<dd>
+<blockquote>
+Hoare, J.M., and Coonrad, W.L., 1961, Geologic map of the Goodnews Quadrangle, Alaska: Miscellaneous Geologic Investigations Map I 339, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12856">&lt;http://www.dggs.alaska.gov/pubs/id/12856&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Hoare, J.M. and Coonrad, W.L., 1961. Geologic line work on this map other than specified faults was not captured. The Togiak-Tikchik section was digitized.$
+
+</dd>
+</dl>
+<p>
+<dt><b>Csejtey, Bela and others, 1992</b> (source 15 of 54)
+<dd>
+<blockquote>
+Csejtey, Bela, Jr., Mullen, M.W., Cox, D.P., and Stricker, G.D., 1992, Geology and geochronology of the Healy Quadrangle, south-central Alaska: Miscellaneous Investigations Series Map I 1961, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12847">&lt;http://www.dggs.alaska.gov/pubs/id/12847&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  63 p., 2 sheets, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Csejtey, Bela and others, 1992. Geologic line work on this map other than specified faults was not captured. The West Muldrow-Alsek section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Cady, W.M. and others, 1955</b> (source 16 of 54)
+<dd>
+<blockquote>
+Cady, W.M., Wallace, R.E., Hoare, J.M., and Webber, E.J., 1955, The central Kuskokwim region, Alaska: Professional Paper P 268, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/3818">&lt;http://www.dggs.alaska.gov/pubs/id/3818&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  132 p., 5 sheets</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault and Atsaksovluk fault line work and all points are based on Cady, W.M. and others, 1955. Geologic line work on this map other than specified faults was not captured. For the Denali fault, the Holitna and Boss Creek sections were digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Reed, B.L. and Nelson, S.W., 1980</b> (source 17 of 54)
+<dd>
+<blockquote>
+Reed, B.L., and Nelson, S.W., 1980, Geologic map of the Talkeetna Quadrangle, Alaska: Miscellaneous Investigations Series Map I 1174, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12942">&lt;http://www.dggs.alaska.gov/pubs/id/12942&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  15 p., 1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Reed, B.L. and Nelson, S.W., 1980. The Pass Creek fault line work and all points are based on Reed and Nelson, 1980. Geologic line work on this map other than specified faults was not captured. The Tonzona-Muldrow section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Nokleberg, W.J. and others, 1992</b> (source 18 of 54)
+<dd>
+<blockquote>
+Nokleberg, W.J., Aleinikoff, J.N., Lange, I.M., Silva, S.R., Miyaoka, R.T., Schwab, C.E., and Zehner, R.E., 1992, Preliminary geologic map of the Mount Hayes Quadrangle, eastern Alaska Range, Alaska: Open-File Report OF 92-594, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/11827">&lt;http://www.dggs.alaska.gov/pubs/id/11827&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  39 p., 1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Nokleberg, W.J. and others, 1992. Geologic line work on this map other than specified faults was not captured. The West Muldrow-Alsek section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Haeussler, P.J., 2009</b> (source 19 of 54)
+<dd>
+<blockquote>
+Haeussler, P.J., 2009, Surface rupture map of the 2002 M7.9 Denali Fault Earthquake, Alaska; Digital Data: Data Series DS 422, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/19902">&lt;http://www.dggs.alaska.gov/pubs/id/19902&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  9 p., 1 sheet, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+For the 2002 Denali fault earthquake rupture, The Denali fault, Totschunda fault, and Susitna Glacier fault line work and all points are based on Haeussler, P.J., 2009. Geologic line work on this map other than specified faults was not captured. Line work was generalized to a scale of 1:63,000 based on personal communication with P. Haeussler, USGS, 2012. The Denali fault part encompasses the Central Muldrow-Alsek section.
+
+</dd>
+</dl>
+<p>
+<dt><b>Richter, D.H., 1976</b> (source 20 of 54)
+<dd>
+<blockquote>
+Richter, D.H., 1976, Geologic map of the Nabesna Quadrangle, Alaska: Miscellaneous Investigations Series Map I 932, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12873">&lt;http://www.dggs.alaska.gov/pubs/id/12873&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Richter, D.H., 1976. Geologic line work on this map other than specified faults was not captured. The Central Muldrow-Alsek section was digitized. The Totschunda fault line work and all points are based on Richter, 1976. Georegistration magnification is excellent at 1:63,360 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>MacKevett, E.M. and others, 1974</b> (source 21 of 54)
+<dd>
+<blockquote>
+MacKevett, E.M., Jr., Robertson, E.C., and Winkler, G.R., 1974, Geology of the Skagway B-3 and B-4 quadrangles, southeastern Alaska: Professional Paper P 832, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/3961">&lt;http://www.dggs.alaska.gov/pubs/id/3961&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  33 p., 1 sheet, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on MacKevett, E.M. and others, 1974. Geologic line work on this map other than specified faults was not captured. The Chilkat River section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Loney, R.A. and others, 1975</b> (source 22 of 54)
+<dd>
+<blockquote>
+Loney, R.A., Brew, D.A., Muffler, L.J.P., and Pomeroy, J.S., 1975, Reconnaissance geology of Chichagof, Baranof, and Kruzof islands, southeastern Alaska: Professional Paper P 792, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/3956">&lt;http://www.dggs.alaska.gov/pubs/id/3956&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  105 p., 4 sheets, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Loney, R.A. and others, 1975. Geologic line work on this map other than specified faults was not captured. The Chatham Strait section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Kennedy, G.C. and Waldron, H.H., 1955</b> (source 23 of 54)
+<dd>
+<blockquote>
+Kennedy, G.C., and Waldron, H.H., 1955, Geology of Pavlof Volcano and vicinity, Alaska: Bulletin B 1028-A, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/3567">&lt;http://www.dggs.alaska.gov/pubs/id/3567&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  p. 1-19, 1 sheet, scale 1:100,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  100000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Emmons Lake fault line work and all points are based on Kennedy, G.C. and Waldron, H.H., 1955. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:63,360 and good at 1:24,000, and fair at 1:10,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Tysdal, R.G. and Case, J.E., 1979</b> (source 24 of 54)
+<dd>
+<blockquote>
+Tysdal, R.G., and Case, J.E., 1979, Geologic map of the Seward and Blying Sound quadrangles, Alaska: Miscellaneous Investigations Series Map I 1150, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12945">&lt;http://www.dggs.alaska.gov/pubs/id/12945&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  12 p., 1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Hanning Bay fault line work and all points are based on Tysdal, R.G. and Case, J.E., 1979. The Patton Bay fault line work and all points are based on Tysdal and Case, 1979. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bundtzen, T.K. and others, 1999</b> (source 25 of 54)
+<dd>
+<blockquote>
+Bundtzen, T.K., Harris, E.E., Miller, M.L., Layer, P.W., and Laird, G.M., 1999, Geology of the Sleetmute C-7, C-8, D-7, and D-8 quadrangles, Horn Mountains, southwestern Alaska: Report of Investigation RI 98-12, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/2588">&lt;http://www.dggs.alaska.gov/pubs/id/2588&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  38 p., 3 sheets, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon fork fault line work and all points are based on Bundtzen, T.K. and others, 1999. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bundtzen, T.K. and Laird, G.M., 1982</b> (source 26 of 54)
+<dd>
+<blockquote>
+Bundtzen, T.K., and Laird, G.M., 1982, Geologic map of the Iditarod D-2 and eastern D-3 quadrangles, Alaska: Geologic Report GR 72, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/432">&lt;http://www.dggs.alaska.gov/pubs/id/432&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon fork fault line work and all points are based on Bundtzen, T.K. and Laird, G.M., 1982. Geologic line work on this map other than specified faults was not captured.Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bundtzen, T.K. and Laird, G.M., 1983</b> (source 27 of 54)
+<dd>
+<blockquote>
+Bundtzen, T.K., and Laird, G.M., 1983, Geologic map of the Iditarod D-1 Quadrangle, Alaska: Professional Report PR 78, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/2252">&lt;http://www.dggs.alaska.gov/pubs/id/2252&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon fork fault line work and all points are based on Bundtzen, T.K. and Laird, G.M., 1983. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bundtzen, T.K. and others, 1988</b> (source 28 of 54)
+<dd>
+<blockquote>
+Bundtzen, T.K., Laird, G.M., and Lockwood, M.S., 1988, Geologic map of the Iditarod C-3 Quadrangle, Alaska: Professional Report PR 96, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/2277">&lt;http://www.dggs.alaska.gov/pubs/id/2277&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  13 p., 1 sheet, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon fork fault line work and all points are based on Bundtzen, T.K. and others, 1988. Geologic line work on this map other than specified faults was not captured.Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bundtzen, T.K. and others, 1992</b> (source 29 of 54)
+<dd>
+<blockquote>
+Bundtzen, T.K., Miller, M.L., Laird, G.M., and Bull, K.F., 1992, Geology and mineral resources of Iditarod mining district, Iditarod B-4 and eastern B-5 quadrangles, southwestern Alaska: Professional Report PR 97, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/2278">&lt;http://www.dggs.alaska.gov/pubs/id/2278&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  88 p., 2 sheets, scale 1:63,360</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon Fork fault line work and all points are based on Bundtzen, T.K. and others, 1992. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Hoare, J.M. and Coonrad, W.L., 1959</b> (source 30 of 54)
+<dd>
+<blockquote>
+Hoare, J.M., and Coonrad, W.L., 1959, Geology of the Russian Mission Quadrangle, Alaska: Miscellaneous Geologic Investigations Map I 292, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12858">&lt;http://www.dggs.alaska.gov/pubs/id/12858&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon Fork fault line work and all points are based on Hoare, J.M. and Coonrad, W.L., 1959. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Patton, W.W. and others, 1980</b> (source 31 of 54)
+<dd>
+<blockquote>
+Patton, W.W., Jr., Moll, E.J., Dutro, J.T., Jr., Silberman, M.L., and Chapman, R.M., 1980, Preliminary geologic map of Medfra quadrangle, Alaska: Open-File Report OF 80-811-A, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12521">&lt;http://www.dggs.alaska.gov/pubs/id/12521&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Iditarod-Nixon Fork fault line work and all points are based on Patton, W.W. and others, 1980. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000 and good at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Cass, J.T., 1959</b> (source 32 of 54)
+<dd>
+<blockquote>
+Cass, J.T., 1959, Reconnaissance geologic map of the Norton Bay Quadrangle, Alaska: Miscellaneous Geologic Investigations Map I 286, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12888">&lt;http://www.dggs.alaska.gov/pubs/id/12888&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Kaltag fault line work and all points are based on Cass, J.T., 1959. Geologic line work other than the specified fault was not captured.
+
+</dd>
+</dl>
+<p>
+<dt><b>Patton, W.W. and others, 1978</b> (source 33 of 54)
+<dd>
+<blockquote>
+Patton, W.W., Miller, T.P., Chapman, R.M., and Yeend, W., 1978, Geologic map of the Melozitna Quadrangle, Alaska: Miscellaneous Investigations Series Map I 1071, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12864">&lt;http://www.dggs.alaska.gov/pubs/id/12864&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Kaltag fault line work and all points are based on Patton, W.W. and others, 1978. Geologic line work other than the specified fault was not captured.
+
+</dd>
+</dl>
+<p>
+<dt><b>Patton, W.W. and Moll-Stalcup, E.J., 1996</b> (source 34 of 54)
+<dd>
+<blockquote>
+Patton, W.W., and Moll-Stalcup, E.J., 1996, Geologic map of the Unalakleet Quadrangle, West-Central Alaska: Miscellaneous Geologic Investigations Map I 2559, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12904">&lt;http://www.dggs.alaska.gov/pubs/id/12904&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  39 p., 1 sheet</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Kaltag fault line work and all points are based on Patton, W.W. and Moll-Stalcup, E.J., 1996. Geologic line work other than the specified fault was not captured.
+
+</dd>
+</dl>
+<p>
+<dt><b>Patton, W.W. and Moll-Stalcup, E.J., 2000</b> (source 35 of 54)
+<dd>
+<blockquote>
+Patton, W.W., and Moll-Stalcup, E.J., 2000, Geologic map of the Nulato Quadrangle, west-central Alaska: Geologic Investigations Series Map I 2677, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/14833">&lt;http://www.dggs.alaska.gov/pubs/id/14833&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  41 p</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Kaltag fault line work and all points are based on Patton, W.W. and Moll-Stalcup, E.J., 2000. Geologic line work other than the specified fault was not captured.
+
+</dd>
+</dl>
+<p>
+<dt><b>Nokleberg, W.J. and others, 1982</b> (source 36 of 54)
+<dd>
+<blockquote>
+Nokleberg, W.J., Albert, N.R.D., Bond, G.C., Herzon, P.L., Miyaoka, R.T., Nelson, W.H., Richter, D.H., Smith, T.E., Stout, J.H., Yeend, Warren, and Zehner, R.E., 1982, Geologic map of the southern part of Mount Hayes Quadrangle, Alaska: Open-File Report OF 82-52, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/11456">&lt;http://www.dggs.alaska.gov/pubs/id/11456&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  26 p., 1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The McCallum Creek fault line work and all points are based on Nokleberg, W.J. and others, 1982. Geologic line work on this map other than specified faults were not captured. Georegistration magnification is good at 1:250,000. There is 400 meters of error of the placement of the fault prior to digitization due to paper map gridline inconsistencies.
+
+</dd>
+</dl>
+<p>
+<dt><b>Foster, H.L. and others, 1983</b> (source 37 of 54)
+<dd>
+<blockquote>
+Foster, H.L., Laird, Jo, Keith, T.E.C., Cushing, G.W., and Menzie, W.D., 1983, Preliminary geologic map of the Circle Quadrangle, Alaska: Open-File Report OF 83-170-A, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12617">&lt;http://www.dggs.alaska.gov/pubs/id/12617&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  30 p., 1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  document, map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Medicine Lake lineament and Preacher fault of the Tintina fault zone line work and all points are based on Foster, H.L. and others, 1983. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000, 1:63,360 and at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Dover, J.H. and Miyaoka, R.T., 1988</b> (source 38 of 54)
+<dd>
+<blockquote>
+Dover, J.H., and Miyaoka, R.T., 1988, Reinterpreted geologic map and fossil data, Charley River Quadrangle, east-central Alaska: Miscellaneous Field Studies Map MF 2004, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/13097">&lt;http://www.dggs.alaska.gov/pubs/id/13097&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  2 sheets, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Tintina fault zone line work and all points are based on Dover, J.H. and Miyaoka, R.T., 1988. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000, 1:63,360 and at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Foster, H.L., 1976</b> (source 39 of 54)
+<dd>
+<blockquote>
+Foster, H.L., 1976, Geologic map of the Eagle Quadrangle, Alaska: Miscellaneous Investigations Series Map I 922, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12850">&lt;http://www.dggs.alaska.gov/pubs/id/12850&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Tintina fault zone line work and all points are based on Foster, H.L., 1976. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:250,000, 1:63,360 and at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>MacKevett, E.M., Jr., 1978</b> (source 40 of 54)
+<dd>
+<blockquote>
+MacKevett, E.M., Jr., 1978, Geologic map of the McCarthy Quadrangle, Alaska: Miscellaneous Investigations Series Map I 1032, U.S. Geological Survey, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/12946">&lt;http://www.dggs.alaska.gov/pubs/id/12946&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 sheet, scale 1:250,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Totschunda fault line work and all points are based on MacKevett, E.M., Jr., 1978. Geologic line work on this map other than specified faults was not captured. Georegistration magnification is excellent at 1:63,360 and excellent at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bird, Peter, 2003</b> (source 41 of 54)
+<dd>
+<blockquote>
+Bird, Peter, 20030314, An updated digital model of plate boundaries: Geochemistry Geophysics Geosystems March 14, 2003, Vol. 4, Issue 3, American Geophysical Union and The Geochemical Society, United States, United States.<p>
+Online Links:
+<ul>
+<li>DOI:10.1029/2001GC000252
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  illus. incl. 3 tables, sketch maps</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  online</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Alaska-Aleutian Megathrust, Aleutian megathrust, and Aleutian fault line work and all points are based on Bird, Peter, 2003. Geologic line work on this map other than specified faults was not captured.
+
+</dd>
+</dl>
+<p>
+<dt><b>ESRI, 2011</b> (source 42 of 54)
+<dd>
+<blockquote>
+ESRI, 20110601, Ocean_Basemap.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  
+<dd>
+
+ESRI (2011) Ocean_Basemap, ESRI, scale range 1:591,657,528 down to 1:1,155,581.
+
+</dd>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  online</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Alaska-Aleutian Megathrust, Aleutian megathrust, and Aleutian fault line work was further constrained by bathymetry based on ESRI Ocean_Basemap after the integration of Bird, Peter, 2003.
+
+</dd>
+</dl>
+<p>
+<dt><b>Woodward-Lundgren &amp; Associates, 1974</b> (source 43 of 54)
+<dd>
+<blockquote>
+Associates, Woodward-Lundgren &amp; , 1974, Summary report basis for pipeline design for active-fault crossings for the Trans-Alaska Pipeline System.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  Appendix A-3.1111, Figure 157.</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Figure 157 in Woodward-Lundgren &amp; Associates, 1974 includes the best trace of the Dall Mountain fault, however the figure cannot be accurately georeferenced. Koehler mapped Figure 157 onto the Beaver DRG topo quad (Brosege et al., 1973), which was subsequently georegistered and rectified. Georegistration magnification is excellent at 1:24,000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bostock, H.S., 1952</b> (source 44 of 54)
+<dd>
+<blockquote>
+Bostock, H.S., 1952, Geology of Northwest Shakwak Valley, Yukon Territory: Geological Survey of Canada Memoir v. 267.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  54 p., illus. incl. geol. map</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Scale_Denominator:</em>  253440</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Denali fault line work and all points are based on Bostock, H.S., 1952. Geologic line work on this map other than specified faults was not captured. The East Muldrow-Alsek section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Muller, J.E., 1967</b> (source 45 of 54)
+<dd>
+<blockquote>
+Muller, J.E., 1967, Kluane Lake map-area, Yukon Territory: Geological Survey of Canada Memoir v. 340.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  134 p., 2 oversized plates</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Scale_Denominator:</em>  253440</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Denali fault line work and all points are based on Muller, J.E., 1967. Geologic line work on this map other than specified faults was not captured. The East Muldrow-Alsek section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Campbell, R.B. and Dodds, C.J., 1975</b> (source 46 of 54)
+<dd>
+<blockquote>
+Campbell, R.B., and Dodds, C.J., 1975, Operation Saint Elias, Yukon Territory: in Report of Activities Part A, April to October 1974: Geological Survey of Canada Paper Paper 75-1.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  pp. 51-53, geol. map</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Denali fault line work and all points are based on Campbell, R.B. and Dodds, C.J., 1975. Geologic line work on this map other than specified faults was not captured. The Dalton section was digitized.
+
+</dd>
+</dl>
+<p>
+<dt><b>Reese, R. and others, in prep</b> (source 47 of 54)
+<dd>
+<blockquote>
+Reece, R., Gulick, S.P.S., Christeson, G., von Avendonk, H., Horton, B., and Barth, G., Unknown, Effects of the Yakutat terrane collision with North America on the neighboring Pacific Plate: Journal of Geophysical Research (in prep).<p>
+</blockquote>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  vector digital data</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Gulf of Alaska shear zone line work and all points are based on Reese, R. and others, in prep. Digital GIS files were provided by personal communication from Sean Gulick and Bobby Reese, University of Texas at Austin.
+
+</dd>
+</dl>
+<p>
+<dt><b>Ruppert, N.A. and others, 2008</b> (source 48 of 54)
+<dd>
+<blockquote>
+Ruppert, N.A., Ridgway, K.D., and Freymueller, J.T., 2008, Active tectonics of interior Alaska; seismicity, GPS geodesy, and local geomorphology: Geophysical Monograph Vol. 179, American Geophysical Union, Washington, DC, United States.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  pp. 109-133, illus. incl. 1 table, geol. sketch maps</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+Interior Alaska seismic zones including the Fairbanks, Minto Flats, Salcha, and Rampart seismic zones were best fit by encompassing seismicity shown on Plate 4 in Ruppert, N.A. and others, 2008. Ovals representing the seismic zones were drawn in ARC/GIS at a scale of 1:250000.
+
+</dd>
+</dl>
+<p>
+<dt><b>Carver G.A. and others, 2008</b> (source 49 of 54)
+<dd>
+<blockquote>
+Carver, G.A., Sauber, J.M., Lettis, W., Witter, R., and Whitney, B., 2008, Active faults on northeastern Kodiak Island, Alaska: Geophysical Monograph Vol. 179, American Geophysical Union, Washington, DC, United States.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  p. 167-184, illus. incl. sects., 2 tables, geol. sketch map</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Scale_Denominator:</em>  63360</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Narrow Cape fault zone line work and all points are based on Plate 2 in Carver G.A. and others, 2008. Digitized faults include the Bear Paw, Bison, Claudia, Narrow Cape faults and several unnamed strands.
+
+</dd>
+</dl>
+<p>
+<dt><b>Gulick, S.P.S. and others, 2007</b> (source 50 of 54)
+<dd>
+<blockquote>
+Gulick, S.P.S., Lowe, L.A., Pavlis, T.L., Gardner, J.V., and Mayer, L.A., 2007, Geophysical insights into the Transition Fault debate; propagating strike slip in response to stalling Yakutat Block subduction in the Gulf of Alaska: Geophysical Monograph Vol. 35, Issue 8, Geological Society of America, Boulder, CO, United States.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  pp. 763-766, illus. incl. sects., sketch map</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  ARC/GIS vector coverage</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Transition fault line work and all points are based on Gulick, S.P.S. and others, 2007. Digital GIS files were provided by personal communication from Sean Gulick, University of Texas at Austin.
+
+</dd>
+</dl>
+<p>
+<dt><b>Bemis, S.P. and others, 2012</b> (source 51 of 54)
+<dd>
+<blockquote>
+Bemis, S.P., Carver, G.A., and Koehler, R.D., 2012, The Quaternary thrust system of the Northern Alaska Range: Geosphere Vol. 8, Issue 1, Geological Society of America, Boulder, CO, United States.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  pp. 196-205</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  ARC/INFO vector coverage</dt>
+<dt><em>Source_Scale_Denominator:</em>  100000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Northern Foothills fold and thrust belt line work and all points are based on Bemis, S.P. and others, 2012. Geologic line work on this map other than specified faults were not captured. Faults include the Bear Creek, Canteen, Ditch Creek, Billy Creek, Cathedral Rapids, Cathedral Rapids B, Donnelly Dome, Dot &quot;T&quot; Johnson, East Fork, Eva Creek, Glacier Creek, Gold King A, Gold King B, Granite Mountain fault, Healy Creek, Healy, Hunter, Kansas Creek, Macomb Plateau, McGinnis Glacier, Molybdenum Ridge, Mystic Mountain, Northern Foothills thrust, Panoramic, Park Road, Peters Dome, Red Mountain, Rex, Stampede, Trident, Trident Glacier, Potts, and unnamed faults and the Kantishna Hills anticline.
+
+</dd>
+</dl>
+<p>
+<dt><b>Worthington, L.L. and others, 2010</b> (source 52 of 54)
+<dd>
+<blockquote>
+Worthington, L.L., Gulick, S.P.S., and Pavlis, T.L., 2012, Coupled stratigraphic and structural evolution of a glaciated orogenic wedge, offshore St. Elias Orogen, Alaska: Tectonics Vol. 29, Issue 6, American Geophysical Union, Washington, DC, United States.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  illus. incl. sects., 5 tables, sketch maps</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  ARC/GIS vector coverage</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Pamplona fault zone line work and all points are based on Worthington, L.L. and others, 2010. Digital GIS files were provided by personal communication from Sean Gulick, University of Texas at Austin.
+
+</dd>
+</dl>
+<p>
+<dt><b>Plafker, George and Thatcher, Wayne, 2008</b> (source 53 of 54)
+<dd>
+<blockquote>
+Plafker, George, and Thatcher, Wayne, 2012, Geological and geophysical evaluation of the mechanisms of the great 1899 Yakutat Bay earthquakes: Geophysical Monograph Vol. 179, American Geophysical Union, Washington, DC, United States.<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  pp. 215-236, illus. incl. block diag., tables, geol. sketch map</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  paper</dt>
+<dt><em>Source_Scale_Denominator:</em>  250000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+The Otmeloi fault and Bancas Point fault line work and all points are based on Plate 2 in Plafker, George and Thatcher, Wayne, 2008. Geologic line work on this map other than specified faults was not captured.
+
+</dd>
+</dl>
+<p>
+<dt><b>Plafker, George and others, 1994</b> (source 54 of 54)
+<dd>
+<blockquote>
+Plafker, George, Gilpin, L.M., and Lahr, J.C., 1994, Neotectonic map of Alaska.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/22331">&lt;http://www.dggs.alaska.gov/pubs/id/22331&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  2 sheets, scale 1:2,500,000</dt>
+</dl>
+<dl>
+<dt><em>Type_of_Source_Media:</em>  map</dt>
+<dt><em>Source_Scale_Denominator:</em>  2500000</dt>
+<dt><em>Source_Contribution:</em>  
+<dd>
+
+An initial list of Quaternary active structures for the Alaska fault and fold database was derived from The Neotectonic Map of Alaska
+
+</dd>
+</dl>
+<p>
+</dl>
+</li>
+<li><a name="how.2"><b>How were the data generated, processed, and modified?</b></a><p>
+<dl>
+<dt>Date: 2002 (process 1 of 2)
+<dd>
+An initial list of Quaternary active structures for the Alaska fault and fold database was derived from The Neotectonic Map of Alaska (Plafker, George and others, 1994) and supplemented with more recent data where available. Maps and literature compiled in Craw and others (2001) and more than 1,000 references related to the project and archived at DGGS were used to determine the best fault traces to digitize, and to verify that sufficient evidence was available to classify a fault or fold as a Quaternary active structure. See APPENDIX A of the accompanying text for a complete list of references.
+<p>
+Data sources used in this process:
+<ul>
+<li>Plafker, George and others, 1994
+</ul>
+<p>
+<dt>Date: 2011 (process 2 of 2)
+<dd>
+Quaternary faults and folds were georegistered from paper maps contained in 1970s vintage and earlier bedrock maps, and newer publications when available. The most common map scale used was 1:250,000, however, the scales range from 1:20,000 to 1:500,000. Paper maps were scanned using a large-format scanner and the resulting tiff files were georegistered in ArcMap. In some cases, the only available map traces were figures contained in published papers, making accurate registration difficult. This problem was alleviated by adding as many control points as possible to obtain a best fit to topographic base maps. Detailed inspection (measuring with a ruler) of several maps published at 1:250,000 scale revealed that the scale was not correct. For these maps, digitizing was based on terrain matching between source maps and the digital fault database. Source map data was in a wide variety of projections common in Alaska. Thus, source data was imported in its native projection and reprojected to the database projection (for instance, NAD 27 UTM to GCS WGS 1984). With the exception of the Denali fault, tectonic features were not digitized in Canada. General boundaries of seismic zones in interior Alaska were defined based on seismicity in Ruppert and others (2008). See the accompanying text for a complete list of references and a more thorough description of the methodology. This metadata file DOES NOT provide a comprehensive list of references, see APPENDIX A of the accompanying text for a complete list of references.
+<p>
+Data sources used in this process:
+<ul>
+<li>Bader, J.W. and Bird, K.J., 1986
+<li>Beikman, H.M., 1974
+<li>Bemis, S.P. and others, 2012
+<li>Bird, Peter, 2003
+<li>Bostock, H.S., 1952
+<li>Brosge, W.P. and others, 1973
+<li>Bundtzen, T.K. and Laird, G.M., 1982
+<li>Bundtzen, T.K. and Laird, G.M., 1983
+<li>Bundtzen, T.K. and others, 1988
+<li>Bundtzen, T.K. and others, 1992
+<li>Bundtzen, T.K. and others, 1999
+<li>Cady, W.M. and others, 1955
+<li>Campbell, R.B. and Dodds, C.J., 1975
+<li>Carver G.A. and others, 2008
+<li>Cass, J.T., 1959
+<li>Csejtey, Bela and others, 1992
+<li>Dover, J.H. and Miyaoka, R.T., 1988
+<li>ESRI, 2011
+<li>Foster, H.L. and others, 1983
+<li>Foster, H.L., 1976
+<li>Gulick, S.P.S. and others, 2007
+<li>Haeussler, P.J. and Saltus, R.W., 2011
+<li>Haeussler, P.J., 1998
+<li>Haeussler, P.J., 2009
+<li>Hoare, J.M. and Coonrad, W.L., 1959
+<li>Hoare, J.M. and Coonrad, W.L., 1961
+<li>Kennedy, G.C. and Waldron, H.H., 1955
+<li>Labay, K.A. and Haeussler, P.J., 2001
+<li>Loney, R.A. and others, 1975
+<li>MacKevett, E.M. and others, 1974
+<li>MacKevett, E.M., Jr., 1978
+<li>Miller, D.J., 1971
+<li>Muller, J.E., 1967
+<li>Nokleberg, W.J. and others, 1982
+<li>Nokleberg, W.J. and others, 1992
+<li>Patton, W.W. and Moll-Stalcup, E.J., 1996
+<li>Patton, W.W. and Moll-Stalcup, E.J., 2000
+<li>Patton, W.W. and others, 1978
+<li>Patton, W.W. and others, 1980
+<li>Plafker, George and others, 1994
+<li>Plafker, George and Thatcher, Wayne, 2008
+<li>Plafker, George, 1967
+<li>Reed, B.L. and Nelson, S.W., 1980
+<li>Reese, R. and others, in prep
+<li>Richter, D.H., 1976
+<li>Ruppert, N.A. and others, 2008
+<li>Sainsbury, C.L. and others, 1969
+<li>Till, A.B. and others, 1986
+<li>Tysdal, R.G. and Case, J.E., 1979
+<li>Von Huene, Roland and others, 1980
+<li>Wilson, F.H. and others, 1998
+<li>Winkler, G.R. and Plafker, George, 1993
+<li>Woodward-Lundgren &amp; Associates, 1974
+<li>Worthington, L.L. and others, 2010
+</ul>
+<p>
+</dl>
+</li>
+<li><a name="how.3"><b>What similar or related data should the user be aware of?</b></a><p>
+<blockquote>
+Craw, P.A., Mayer, J.L., and Combellick, R.A., 2001, Preliminary bibliographic database of quaternary faults and folds in Alaska: Miscellaneous Publication MP 44, Alaska Division of Geological &amp; Geophysical Surveys, Fairbanks, AK, USA.<p>
+Online Links:
+<ul>
+<li><a href="http://www.dggs.alaska.gov/pubs/id/2767">&lt;http://www.dggs.alaska.gov/pubs/id/2767&gt;</a>
+</ul>
+<p>
+</blockquote>
+<dl>
+<dt><em>Other_Citation_Details:</em>  1 DVD</dt>
+</dl>
+</li>
+</ol>
+<p>
+<hr/>
+<h3><a name="quality">How reliable are the data; what problems remain in the data set?</a></h3>
+<ol>
+<li><a name="quality.1"><b>How well have the observations been checked?</b></a><p>
+In order to maintain consistency with the National Quaternary fault &amp; fold database standard the USGS specified the GIS fault attribute guidelines. The fields were populated based on the available literature pertaining to the Quaternary faults and folds of Alaska. Fault characteristics, even where known in detail, are reported in broad categories (for example &quot;age less than 1,600,000 years&quot;). More information will be published at a later date as a database of fault summary descriptions. This textural database will contain more specific information about each fault where details are available in the published literature.
+<p>
+</li>
+<li><a name="quality.2"><b>How accurate are the geographic locations?</b></a><p>
+Locations of faults were taken from published literature; these investigations were carried out at a variety of scales of observation, hence some faults will be located more precisely and accurately than others. In general, the locations are accurate as observed on a 1:250,000 scale map, or approximately 450 feet.
+<p>
+</li>
+<li><a name="quality.3"><b>How accurate are the heights or depths?</b></a><p>
+<p>
+</li>
+<li><a name="quality.4"><b>Where are the gaps in the data?  What is missing?</b></a><p>
+This dataset is incomplete and will be updated at a later date as new faults are discovered and additional research is conducted. Thus, not all active faults are included.
+<p>
+</li>
+<li><a name="quality.5"><b>How consistent are the relationships among the observations, including topology?</b></a><p>
+not applicable
+</li>
+</ol>
+<p>
+<hr/>
+<h3><a name="getacopy">How can someone get a copy of the data set?</a></h3>
+<blockquote>
+<a name="getacopy.0"><b>Are there legal restrictions on access or use of the data?</b></a><p>
+<blockquote>
+<dl>
+<dt><em>Access_Constraints:</em>  
+<dd>
+
+This report, map, and/or dataset is available directly from the State of Alaska, Department of Natural Resources, Division of Geological &amp; Geophysical Surveys (see contact information below).
+
+</dd>
+<dt><em>Use_Constraints:</em>  
+<dd>
+
+Any hard copies or published datasets utilizing these datasets shall clearly indicate their source. If the user has modified the data in any way, the user is obligated to describe the types of modifications the user has made. The user specifically agrees not to misrepresent these datasets, nor to imply that changes made by the user were approved by the State of Alaska, Department of Natural Resources, Division of Geological &amp; Geophysical Surveys. The State of Alaska makes no express or implied warranties (including warranties for merchantability and fitness) with respect to the character, functions, or capabilities of the electronic data or products or their appropriateness for any user's purposes. In no event will the State of Alaska be liable for any incidental, indirect, special, consequential, or other damages suffered by the user or any other person or entity whether from the use of the electronic services or products or any failure thereof or otherwise. In no event will the State of Alaska's liability to the Requestor or anyone else exceed the fee paid for the electronic service or product.
+
+</dd>
+</dl>
+</blockquote>
+</blockquote>
+<p>
+<ol>
+<li><a name="getacopy.1"><b>Who distributes the data set?</b></a> (Distributor 1 of 1)<p>
+<div style="margin-left: 2em">
+Alaska Division of Geological &amp; Geophysical Surveys<br/>
+3354 College Road<br/>
+Fairbanks, AK 99709-3707<br/>
+USA<br/>
+<p>
+(907)451-5020 (voice)<br/>
+(907)451-5050 (FAX)<br/>
+dggspubs@alaska.gov<br/>
+<dl>
+<dt><em>Hours_of_Service:</em>  8 am to 4:30 pm, Monday through Friday, except State holidays</dt>
+<dt><em>Contact_Instructions:</em>  
+<dd>
+
+Please view our website (<a href="http://www.dggs.alaska.gov">&lt;http://www.dggs.alaska.gov&gt;</a>) for the latest information on available data. Please contact us using the e-mail address provided above when possible.
+
+</dd>
+</dl>
+</div>
+</li>
+<li><a name="getacopy.2"><b>What's the catalog number I need to order this data set?</b></a><p>
+<tt>MP 141</tt>
+<p>
+</li>
+<li><a name="getacopy.3"><b>What legal disclaimers am I supposed to read?</b></a><p>
+<blockquote>
+The State of Alaska makes no express or implied warranties (including warranties of merchantability and fitness) with respect to the character, function, or capabilities of the electronic services or products or their appropriateness for any user's purposes. In no event will the State of Alaska be liable for any incidental, indirect, special, consequential, or other damages suffered by the user or any other person or entity, whether from the use of the electronic services or products, any failure thereof, or otherwise, and in no event will the State of Alaska's liability to the requestor or anyone else exceed the fee paid for the electronic service or product.
+</blockquote>
+<p>
+</li>
+<li><a name="getacopy.4"><b>How can I download or order the data?</b></a><p>
+<ul>
+<li><b>Availability in non-digital form:</b><p>
+DGGS publications are available as free online downloads or you may purchase paper hard-copies or digital files on CD/DVD or other digital storage media by mail, phone, fax, or email from the DGGS Fairbanks office. To purchase this or other printed reports and maps, contact DGGS by phone (907-451-5020), e-mail (dggspubs@alaska.gov), or fax (907-451-5050). Payment accepted: Cash, check, money order, VISA, or MasterCard. Turnaround time is 1-2 weeks unless special arrangements are made and an express fee is paid. Shipping charge will be the actual cost of postage and will be added to the total amount due. Contact us for the exact shipping amount.
+<p>
+<li><b>Cost to order the data:</b> Contact DGGS for current pricing<p>
+</ul>
+<ul>
+<li><b>Availability in digital form:</b><p>
+<table border="0" cellpadding="2">
+<tr><th align="left" valign="top">Data&nbsp;format:</th>
+<td>
+SHP
+
+</td>
+</tr>
+<tr><th align="left" valign="top">Network&nbsp;links:</th>
+<td>
+<a href="http://www.dggs.alaska.gov/pubs/id/23944">&lt;http://www.dggs.alaska.gov/pubs/id/23944&gt;</a><br/>
+</td>
+</tr>
+</table>
+<p>
+<li><b>Cost to order the data:</b> Free download<p>
+</ul>
+<p>
+</li>
+</ol>
+<p>
+<hr/>
+<h3><a name="metaref">Who wrote the metadata?</a></h3>
+<dl>
+<dt>Dates:
+<dd>Last modified: 19-Jul-2012<br/>
+</dd>
+<dt>Metadata author:
+<dd>
+<div style="margin-left: 2em">
+Metadata manager<br/>
+3354 College Road<br/>
+Fairbanks, AK 99709-3707<br/>
+USA<br/>
+<p>
+(907)451-5020 (voice)<br/>
+</div>
+</dd>
+<dt>Metadata standard: <dd>FGDC Content Standard for Digital Geospatial Metadata (FGDC-STD-001-1998)<dt>Metadata extensions used:
+<dd>
+<ul>
+<li><a href="http://www.dggs.alaska.gov/metadata/dggs.ext">&lt;http://www.dggs.alaska.gov/metadata/dggs.ext&gt;</a></li>
+</ul>
+</dd>
+</dl>
+<p></p>
+<hr/>
+<span class="mp-generated">Generated by <a href="http://geology.usgs.gov/tools/metadata/tools/doc/mp.html"><tt>mp</tt></a> version 2.9.2 on Thu Jul 19 13:02:12 2012<br/></span>
+
+</body>
+</html>

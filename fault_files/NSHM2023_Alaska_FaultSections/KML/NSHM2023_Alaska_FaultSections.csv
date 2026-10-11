@@ -1,0 +1,106 @@
+﻿name,state,dip,rake,upperDepth,lowerDepth,rateType,FaultID,rate
+Camden Bay (west),AK,45,90,0,15,SLIP_RATE,4200,0.01
+Esker Creek,AK,45,90,0,14,VERTICAL_SLIP_RATE,4285,5.00
+Boundary,AK,85,90,0,15,SLIP_RATE,4286,3.00
+Rude River,AK,45,90,0,15,NOMINAL,4287,0.20
+Kigluaik,AK,60,-90,0,15,NOMINAL,4210,0.20
+Bancas Point,AK,45,90,0,14,VERTICAL_SLIP_RATE,4263,3.00
+Gulf of Alaska,AK,90,180,0,10,NOMINAL,4264,0.20
+Northern Foothills,AK,45,90,0,15,SLIP_RATE,4230,3.00
+Billy Creek,AK,60,45,0,15,SLIP_RATE,4231,0.01
+Cordova,AK,45,90,0,15,NOMINAL,4265,0.01
+Denali (Boss Creek),AK,90,180,0,15,NOMINAL,4001,0.20
+Denali (west),AK,90,180,0,15,SLIP_RATE,4002,5.30
+Kantishna Hills (north),AK,5,90,9,10,NOMINAL,4232,1.00
+Granite Point,AK,45,90,0,15,SLIP_RATE,4250,2.50
+Lewis River,AK,45,90,0,15,NOMINAL,4251,0.01
+North Cook Inlet - SRS,AK,45,90,0,15,SLIP_RATE,4252,0.30
+Kayak,AK,60,90,0,15,SLIP_RATE,4266,3.50
+Icy Point,AK,50,90,0,15,VERTICAL_SLIP_RATE,4267,5.00
+Cape Cleare,AK,45,90,0,15,SLIP_RATE,4268,2.00
+Bagley (west),AK,45,90,0,15,NOMINAL,4269,0.20
+Narrow Cape,AK,60,45,0,15,SLIP_RATE,4270,3.30
+Minto Flats (north),AK,80,180,0,19,SLIP_RATE,4233,2.00
+Minto Flats (south),AK,80,180,0,14,SLIP_RATE,4234,2.00
+"Denali (center, middle)",AK,90,180,0,15,SLIP_RATE,4004,7.40
+Fairweather (south),AK,88,172,0,15,SLIP_RATE,4040,49.00
+Granite Mountain (west),AK,60,45,0,15,NOMINAL,4235,0.20
+McLeod Creek,AK,45,90,0,15,SLIP_RATE,4236,1.70
+Broad Pass Thrust,AK,60,90,0,20,SLIP_RATE,4253,3.00
+Kaktovik (west),AK,69,180,2,15,SLIP_RATE,4201,0.10
+"Queen Charlotte (outboard, center)",AK,45,90,0,15,NOMINAL,4300,0.01
+"Queen Charlotte (outboard, north)",AK,45,90,0,15,NOMINAL,4301,0.01
+"Queen Charlotte (outboard, south)",AK,45,90,0,15,NOMINAL,4302,0.01
+Iditarod - Nixon Fork (center),AK,90,180,0,15,NOMINAL,4221,0.01
+Iditarod - Nixon Fork (west),AK,90,180,0,15,NOMINAL,4222,0.01
+Queen Charlotte (south),AK,90,180,0,15,SLIP_RATE,4043,54.40
+Camden Bay (east),AK,45,90,0,15,NOMINAL,4202,0.01
+Kantishna Hills (south),AK,5,90,9,10,SLIP_RATE,4237,1.20
+Queen Charlotte (north),AK,90,180,0,15,SLIP_RATE,4041,53.50
+Queen Charlotte (center),AK,90,180,0,15,SLIP_RATE,4042,54.20
+Totschunda,AK,90,180,0,15,SLIP_RATE,4020,7.40
+Chugach - St.Elias,AK,45,90,0,15,SLIP_RATE,4271,4.00
+"Denali (east, middle)",YT,90,180,0,15,SLIP_RATE,4007,2.00
+Suckling Hills,AK,60,90,0,15,SLIP_RATE,4272,4.70
+Connector (inferred),AK,85,176,0,15,SLIP_RATE,4022,12.90
+Malaspina,AK,20,90,0,14,SLIP_RATE,4273,5.00
+Kaktovik (east),AK,32,-90,2,15,NOMINAL,4303,0.10
+Purcell Mountains,AK,60,-90,0,15,NOMINAL,4211,0.20
+Marsh Creek,AK,65,90,0,15,NOMINAL,4304,0.01
+Dall Mountain,AK,60,-90,0,15,NOMINAL,4212,0.20
+Pivot,AK,90,180,0,15,NOMINAL,4213,0.01
+Bendeleben,AK,60,-90,0,15,NOMINAL,4214,0.20
+Kaltag,AK,90,180,0,15,SLIP_RATE,4223,0.01
+Iditarod - Nixon Fork (east),AK,90,180,0,15,NOMINAL,4224,0.01
+Peters Dome,AK,45,90,0,15,SLIP_RATE,4238,1.00
+Chedotlothna,AK,45,90,0,15,NOMINAL,4239,0.01
+"Denali (center, west)",AK,90,180,0,15,SLIP_RATE,4003,9.90
+Susitna Glacier,AK,34,90,0,15,SLIP_RATE,4254,1.80
+Donnelly Dome,AK,45,90,0,15,SLIP_RATE,4240,1.00
+Granite Mountain (east),AK,45,90,0,15,NOMINAL,4241,0.20
+Canteen,AK,90,0,0,15,SLIP_RATE,4242,1.60
+DOT T Johnson,AK,45,90,0,15,SLIP_RATE,4243,1.00
+Cathedral Rapids,AK,45,90,0,15,SLIP_RATE,4244,1.00
+"Denali (center, east)",AK,90,180,0,15,SLIP_RATE,4005,12.90
+McCallum Creek,AK,35,90,0,15,SLIP_RATE,4255,0.60
+Yakutat Foothills,AK,70,90,0,15,SLIP_RATE,4274,5.00
+Ten Fathom,AK,60,90,0,15,SLIP_RATE,4275,3.50
+Ragged Mountain,AK,30,45,0,15,VERTICAL_SLIP_RATE,4276,1.00
+Bagley (middle),AK,45,90,0,15,NOMINAL,4288,1.00
+Etches,AK,45,90,0,15,NOMINAL,4278,0.01
+Montague Strait,AK,61,-90,0,15,NOMINAL,4279,0.20
+Hanning Bay,AK,45,90,0,15,NOMINAL,4280,0.20
+Pass Creek,AK,38,-90,0,15,SLIP_RATE,4256,0.50
+Bunco Lake,AK,45,90,0,15,SLIP_RATE,4257,0.40
+Bulchitna Lake,AK,45,90,0,15,SLIP_RATE,4258,0.30
+Kahiltna River,AK,45,90,0,15,SLIP_RATE,4259,0.50
+Castle Mountain,AK,85,135,0,15,SLIP_RATE,4262,0.50
+"Denali (east, south)",YT,90,180,0,15,NOMINAL,4008,0.01
+Foreland Thrust (Pamplona),AK,45,90,0,12,SLIP_RATE,4281,32.00
+Transition,AK,90,180,0,15,SLIP_RATE,4282,4.00
+Foreland Thrust (Khitrov),AK,45,90,0,15,SLIP_RATE,4283,34.00
+Patton Bay,AK,45,90,0,15,SLIP_RATE,4284,2.00
+Denali (Holitna),AK,90,180,0,15,NOMINAL,4000,0.20
+Atsaksovluk,AK,90,180,0,15,NOMINAL,4289,0.01
+Middle Fork,AK,45,90,0,15,SLIP_RATE,4290,1.00
+"Denali (east, north)",YT,90,180,0,15,SLIP_RATE,4006,5.00
+Decoeli Mountain,YT,45,90,0,15,SLIP_RATE,4291,0.50
+Council,AK,60,-90,0,15,NOMINAL,4292,0.01
+Stevens (west),AK,90,180,0,15,NOMINAL,4293,0.01
+Stevens (east),AK,90,180,0,15,NOMINAL,4294,0.01
+Duke River,YT,45,135,0,15,SLIP_RATE,4021,9.90
+Natazhat,AK,45,135,0,15,VERTICAL_SLIP_RATE,4295,3.00
+Bagley (east),AK,45,90,0,15,SLIP_RATE,4277,4.00
+Bering Glacier,AK,45,90,0,15,SLIP_RATE,4296,9.00
+Paimute (west),AK,90,180,0,15,NOMINAL,4297,0.01
+Paimute (east),AK,90,180,0,15,NOMINAL,4298,0.01
+Goldstream (seismicity),AK,90,180,0,15,NOMINAL,4305,0.01
+Salcha (seismicity),AK,90,180,0,15,NOMINAL,4306,0.01
+Rampart (seismicity),AK,90,180,0,15,NOMINAL,4307,0.01
+Fairbanks (seismicity),AK,90,180,0,15,NOMINAL,4308,0.01
+Purkeypile,AK,45,90,0,15,SLIP_RATE,4299,1.00
+Ugak,AK,45,90,0,15,VERTICAL_SLIP_RATE,4309,1.30
+Kanuti,AK,60,-90,0,15,NOMINAL,4310,0.10
+Chirikof,AK,60,-90,0,15,SLIP_RATE,4311,0.50
+Fairweather (north),AK,88,172,0,15,SLIP_RATE,4039,36.00
+Tintina (Medicine Lake - Preacher),AK,90,90,0,15,SLIP_RATE,4220,0.50
