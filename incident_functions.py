@@ -1,3 +1,7 @@
+#import yaml
+import sys
+import os
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -23,9 +27,41 @@ import tempfile
 from matplotlib.lines import Line2D
 import geopandas as gpd
 import matplotlib.image as mpimg
+from matplotlib.colors import ListedColormap, BoundaryNorm
+from pyproj import Geod, Proj
+import matplotlib.patheffects as pe
 
 
 
+#---------------------------------------------
+#--------FUNCTIONS FOR PULLING DATA FROM PARAMETER FILE----------
+#---------------------------------------------
+
+def read_params(params):
+    '''
+    Read parameters from .yaml file
+
+    Inputs: 
+        params: input parameter (input_parameters.yaml) file read into python
+
+    Returns:
+        variables needed for computation
+
+    '''
+    #Network inputs----------
+    event_id = params["inputs"]["event_id"] 
+    plot_map = params["inputs"]["plot_map"]  
+    plot_mmi = params["inputs"]["plot_mmi"]
+    plot_accelerations = params["inputs"]["plot_accelerations"]
+    plot_cross_section =  params["inputs"]["plot_cross_section"]
+
+
+    return (event_id, plot_map, plot_mmi, plot_accelerations, plot_cross_section)
+
+
+#---------------------------------------------
+#--------FUNCTIONS FOR PULLING DATA----------
+#---------------------------------------------
 
 
 def pull_earthquakes(lat, lon, max_rad, min_mag, start, end):
@@ -144,8 +180,8 @@ def pull_stations(eq_lat, eq_lon, eq_time, eq_depth, max_rad):
 
     # PULL ALL STATIONS NEARBY----------
     inv = client.get_stations(
-        starttime=UTCDateTime(eq_time)-(60*60*24*7), #pull time from last week
-        endtime=UTCDateTime.now(),
+        starttime=UTCDateTime(eq_time)-(60*60*24*7), #stations in last week
+        endtime=UTCDateTime(eq_time)+(60*60*24*7), # stations week after
         latitude=eq_lat, longitude=eq_lon,
         channel='BHZ,SHZ,HHZ,DHZ,HNZ', #NEED TO UPDATE TO ALL CHANNELS OF INTEREST
         maxradius=kilometers2degrees(max_rad),
@@ -262,6 +298,9 @@ def pull_streams(networks, stations, channels, eq_time):
     return st, inv
 
 
+#---------------------------------------------
+#--------FUNCTIONS FOR MAPMAKING--------------
+#---------------------------------------------
 
 def make_region(lon0, lat0, dlat=2.5, aspect=1.0, max_ratio=10):
     """
@@ -277,39 +316,85 @@ def make_region(lon0, lat0, dlat=2.5, aspect=1.0, max_ratio=10):
     top = min(lat0 + dlat, 90)
     return [left, right, bottom, top]
 
+#---------------------------------------------
+#--------FUNCTIONS FOR CALCULATING SHAKING----------
+#---------------------------------------------
 
-def calculate_shaking(st, inv, p_arrival):
-    '''
+def exceedance_episodes(data, dt, threshold, max_gap=2.0, min_count=3):
+    idx = np.where(np.abs(data) > threshold)[0]
+    if idx.size == 0:
+        return []
+
+    breaks = np.where(np.diff(idx) * dt > max_gap)[0]
+    starts = np.r_[idx[0], idx[breaks + 1]]
+    ends = np.r_[idx[breaks], idx[-1]]
+
+    episodes = []
+    for s, e in zip(starts, ends):
+        seg = data[s:e + 1]
+        n_pos = np.count_nonzero(seg > threshold)
+        n_neg = np.count_nonzero(seg < -threshold)
+        if n_pos + n_neg >= min_count and n_pos > 0 and n_neg > 0:
+            episodes.append((s, e, n_pos + n_neg))
+    return episodes
+'''
+def exceedance_episodes(data, dt, threshold, max_gap=2.0, min_count=3):
+    """
+    Group samples above `threshold` into episodes of near-continuous shaking.
+
+    max_gap:   gaps shorter than this (s) are bridged, so shaking that dips below
+               the threshold briefly is still one episode
+    min_count: minimum number of exceeding samples for an episode to count,
+               which discards isolated spikes
+    Returns a list of (start_idx, end_idx, n_exceed) tuples.
+    """
+    idx = np.where(data > threshold)[0]
+    if idx.size == 0:
+        return []
+
+    # Split wherever the time between consecutive exceedances is larger than max_gap
+    breaks = np.where(np.diff(idx) * dt > max_gap)[0]
+    starts = np.r_[idx[0], idx[breaks + 1]]
+    ends = np.r_[idx[breaks], idx[-1]]
+
+    episodes = []
+    for s, e in zip(starts, ends):
+        n = np.count_nonzero((idx >= s) & (idx <= e))
+        if n >= min_count:
+            episodes.append((s, e, n))
+    return episodes
+'''
+def check_mmi(percent_g):
     #Define thesholds for MMI shaking------------------
-    if MMI == 1:
-        thresh_bott = 0
-        thresh_top = 0.17
-    elif MMI == 3:
-        thresh_bott = 0.17
-        thresh_top = 1.4
-    elif MMI == 4:
-        thresh_bott = 1.4
-        thresh_top = 3.9
-    elif MMI == 5:
-        thresh_bott = 3.9
-        thresh_top = 9.2
-    elif MMI == 6:
-        thresh_bott = 9.2
-        thresh_top = 18
-    elif MMI == 7:
-        thresh_bott = 18
-        thresh_top = 34
-    elif MMI == 8:
-        thresh_bott = 34
-        thresh_top = 65
-    elif MMI == 9:
-        thresh_bott = 65
-        thresh_top = 124
-    elif MMI == 10:
-        threshold_bott = 124
-        thresh_top = 1000
-    '''
+    if percent_g <= 0.17:
+        MMI = 1
+    elif percent_g > 0.17 and percent_g <= 1.4:
+        MMI = 3
+    elif percent_g > 1.4 and percent_g <= 3.9:
+        MMI = 4
+    elif percent_g > 3.9 and percent_g <= 9.2:
+        MMI = 5
+    elif percent_g > 9.2 and percent_g <= 18:
+        MMI = 6
+    elif percent_g > 18 and percent_g <= 34:
+        MMI = 7
+    elif percent_g > 34 and percent_g <= 65:
+        MMI = 8
+    elif percent_g > 65 and percent_g <= 124:
+        MMI = 9
+    elif percent_g > 124:
+        MMI = 10
+    return MMI
+
+
+def calculate_shaking(st2, inv, p_arrival, eq_time):
+
+    st = st2.copy()
     st.remove_response(inventory=inv, output="ACC")
+    #st.detrend('demean')
+    #st.filter('bandpass')
+    #st.filter("lowpass", freq=10,  #0.001
+                #corners=2, zerophase=True)
 
     thresholds = [0.17, 1.4, 3.9, 9.2, 18, 34, 65, 124]
     mmi = [3, 4, 5, 6, 7, 8, 9, 10]
@@ -318,16 +403,16 @@ def calculate_shaking(st, inv, p_arrival):
     #st = st_av + st_av2
     for i in range(len(st)):
         tr1 = st[i]
-        print('Starting', tr1.stats.station)
+        #print('Starting', tr1.stats.station)
 
         #Slice trace so that it is only looking at real signal--------------
-        start = UTCDateTime(tr1.stats.starttime) + p_arrival[i] - 10 #ten seconds before p-arrival
-        end = start + 10+ 2*60 #two minutes after p_arrival
+        start = UTCDateTime(eq_time) + p_arrival[i] - 10 #ten seconds before p-arrival
+        end = start + 10+ 5*60 #two minutes after p_arrival
 
         tr = tr1.slice(starttime=start, endtime=end)
 
-        temp_data = np.abs((tr.data/9.8)*100) #new version
-        #temp_data = (tr.data/9.8)*100 #old version
+        #temp_data = np.abs((tr.data/9.8)*100) #new version
+        temp_data = (tr.data/9.8)*100 #old version
         #temp_data = temp_data[:-3000]
 
         #Loop through MMI thresholds-------------
@@ -338,6 +423,8 @@ def calculate_shaking(st, inv, p_arrival):
         max_mmi = []
         station_list = []
         channel_list = []
+
+        '''
         for k in range(len(thresholds)):
             indices = np.where(temp_data > thresholds[k])[0]
             
@@ -353,11 +440,28 @@ def calculate_shaking(st, inv, p_arrival):
                 start_list.append(0)
                 end_list.append(0)
                 duration_list.append(0)
+        '''
 
+        for k in range(len(thresholds)):
+            episodes = exceedance_episodes(temp_data, tr.stats.delta, thresholds[k],
+                                        max_gap=2.0, min_count=5)
+            if not episodes:
+                start_list.append(0)
+                end_list.append(0)
+                duration_list.append(0)
+            else: # find the maximum episode
+                times = tr.times()
+                # Longest episode = the main shaking
+                s, e, n = max(episodes, key=lambda ep: ep[1] - ep[0])
+
+                start_list.append(start + times[s])
+                end_list.append(start + times[e])
+                duration_list.append(times[e] - times[s])
         # Find indices where condition is met
             station_list.append(tr.stats.station)
             channel_list.append(tr.stats.channel)
             max_shaking.append(np.max(temp_data))
+            max_mmi.append(check_mmi(np.max(temp_data)))
 
         data = {
                 'station': station_list,
@@ -367,6 +471,7 @@ def calculate_shaking(st, inv, p_arrival):
                 'duration': duration_list,
                 'mmi': mmi,
                 'max_shaking': max_shaking,
+                'max_mmi': max_mmi
             }
 
         df = pd.DataFrame(data)
@@ -375,3 +480,43 @@ def calculate_shaking(st, inv, p_arrival):
     result = pd.concat(df_list, ignore_index=True)
 
     return result
+
+#---------------------------------------------
+#--------FUNCTIONS FOR CROSS-SECTION----------
+#---------------------------------------------
+
+def make_profile(start, end, half_width_km=30):
+    """
+    start, end: (lon, lat) of profile endpoints (A and A')
+    Returns project(lons, lats) -> (along_km, perp_km), profile length (km),
+    and the swath outline as lon/lat arrays.
+    """
+    geod = Geod(ellps='WGS84')
+    lon1, lat1 = start
+    lon2, lat2 = end
+
+    # Center the local projection on the profile midpoint
+    az12, _, dist = geod.inv(lon1, lat1, lon2, lat2)
+    lon0, lat0, _ = geod.fwd(lon1, lat1, az12, dist / 2)
+    proj = Proj(proj='aeqd', lat_0=lat0, lon_0=lon0, datum='WGS84')   # meters
+
+    xs, ys = proj(lon1, lat1)
+    xe, ye = proj(lon2, lat2)
+    L = np.hypot(xe - xs, ye - ys)
+    ux, uy = (xe - xs) / L, (ye - ys) / L                # unit vector along profile
+
+    def project(lons, lats):
+        x, y = proj(np.asarray(lons, float), np.asarray(lats, float))
+        dx, dy = x - xs, y - ys
+        along = (dx * ux + dy * uy) / 1000                # km from A along the line
+        perp = (-dx * uy + dy * ux) / 1000                # km off the line (+ = left)
+        return along, perp
+
+    # Swath outline for the map
+    a = np.array([0, L / 1000, L / 1000, 0, 0])
+    p = np.array([-1, -1, 1, 1, -1]) * half_width_km
+    x = xs + (a * ux - p * uy) * 1000
+    y = ys + (a * uy + p * ux) * 1000
+    swath_lon, swath_lat = proj(x, y, inverse=True)
+
+    return project, L / 1000, swath_lon, swath_lat

@@ -463,8 +463,8 @@ plt.show()
 
 
 
-#parrivals = available_stations['p_arrival'].values
-#result = calculate_shaking(st1, inv2, parrivals)
+parrivals = available_stations['p_arrival'].values
+result = calculate_shaking(st1, inv2, parrivals)
 
 #MMI_plot = 5
 
