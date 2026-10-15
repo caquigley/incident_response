@@ -78,9 +78,7 @@ def pull_earthquakes(lat, lon, max_rad, min_mag, start, end):
         max_rad: maximum radius of earthquakes in kilometers (str)
         start: start time in UTC format (str)
         end: end time in UTC format (str)
-        min_mag: minimum magnitude of earthquakes (str)
-        array_name: name of array/station (str)
-        velocity_model: name of velocity model (ex. 'iasp91', 'ak135')
+    
         
     Returns:
         pandas DataFrame:
@@ -90,14 +88,7 @@ def pull_earthquakes(lat, lon, max_rad, min_mag, start, end):
            'latitude': earthquake latitude
            'longitude': earthquake longitude
            'time_utc': origin time in UTC
-           'time_ak': origin time in AK
-           'distance': epicentral distance to event in km
-           'backazimuth': backazimuth from array/station to earthquake
-           'array': name of station/array
-           'slowness': surface slowness (s/km)
-           'trace_vel': surface trace velocity (km/s)
-           'incident_angle': angle from vertical of first arriving wave (degrees)
-           'p_arrival': arrival time of p-wave (seconds)             
+           'time_ak': origin time in AK            
     """
     
     ##Pull data in from FDSNWS: https://earthquake.usgs.gov/fdsnws/event/1/
@@ -171,6 +162,7 @@ def pull_stations(eq_lat, eq_lon, eq_time, eq_depth, max_rad):
     eq_lon: earthquake longitude (float)
     eq_time: earthquake time (str)
     eq_depth: earthquake depth (float)
+    max_rad: radius to search for stations (float)
 
     '''
     print('Finding stations in vicinity of event...')
@@ -183,7 +175,7 @@ def pull_stations(eq_lat, eq_lon, eq_time, eq_depth, max_rad):
         starttime=UTCDateTime(eq_time)-(60*60*24*7), #stations in last week
         endtime=UTCDateTime(eq_time)+(60*60*24*7), # stations week after
         latitude=eq_lat, longitude=eq_lon,
-        channel='BHZ,SHZ,HHZ,DHZ,HNZ', #NEED TO UPDATE TO ALL CHANNELS OF INTEREST
+        channel='BHZ,BHN,BHE,SHZ,SHN,SHE,HHZ,HHN,HHE,DHZ,DHN,DHE,HNZ,HNE,HNN', #NEED TO UPDATE TO ALL CHANNELS OF INTEREST
         maxradius=kilometers2degrees(max_rad),
         level='channel', #channel, station
         )
@@ -223,14 +215,6 @@ def pull_stations(eq_lat, eq_lon, eq_time, eq_depth, max_rad):
                 p_arrivals.append(arr.time)
 
                 channels_list.append(channel.code)
-
-            #Pull out channels available at station-------------
-            #channels = []
-            #for channel in station:
-                #channels.append(channel.code)
-
-            
-
         data = {
             'network': network_list,
             'station': station_list,
@@ -244,11 +228,25 @@ def pull_stations(eq_lat, eq_lon, eq_time, eq_depth, max_rad):
 
     df = pd.DataFrame(data)
     print('Found', len(df), 'stations.')
-
     return df, inv
 
 def pull_streams(networks, stations, channels, eq_time):
 
+    '''
+    Pull streams based on known stations, networks, channels, and time of earthquake.
+    
+    Inputs:
+        networks: list of network strings
+        stations: list of station strings
+        channels: list of channel strings
+        eq_time: time of earthquake in UTC Format (str)
+    Outputs:
+        st: obspy stream
+        inv: obspy inventory with response information
+        df: dataframe with information about available stations
+
+
+    '''
     print('Pulling station data...')
     client = Client("EARTHSCOPE")
 
@@ -284,8 +282,21 @@ def pull_streams(networks, stations, channels, eq_time):
        
     st.merge(fill_value='latest')
     st.trim(START, END, pad='true', fill_value=0)
+
+    '''
+    st.merge(fill_value=None)       # gaps stay masked
+    st.trim(START, END, pad=True)   # padding is masked too
+    
+    for tr in st:
+        data = tr.data.astype(float)
+        if isinstance(data, np.ma.MaskedArray):
+            data = data - data.mean()           # mean over real samples only
+            tr.data = np.ma.filled(data, 0)     # gaps and padding become zeros
+        else:
+            tr.data = data - data.mean()
+    '''
     #st.remove_sensitivity(inventory = inv)  
-    #st.taper(max_percentage=0.05)
+    st.taper(max_percentage=0.05)
     #st.detrend('demean')
     #st.filter("bandpass", freqmin=1, freqmax=18, 
                 #corners=2, zerophase=True)
@@ -295,7 +306,27 @@ def pull_streams(networks, stations, channels, eq_time):
     st.traces.sort(key=lambda tr: (order.get((tr.stats.network, tr.stats.station), len(order)),
                                    tr.stats.channel))
 
-    return st, inv
+    #Pull out stations/channels from actual stations available
+    stas = []
+    chans = []
+    nets = []
+    index = []
+    for i in range(len(st)):
+        stas.append(st[i].stats.station)
+        chans.append(st[i].stats.channel)
+        nets.append(st[i].stats.network)
+        index.append(i)
+
+    data = {
+            'station': stas,
+            'channel': chans,
+            'network': nets,
+            'og_index': index,
+            }
+
+    df = pd.DataFrame(data)
+
+    return st, inv, df
 
 
 #---------------------------------------------
@@ -304,6 +335,8 @@ def pull_streams(networks, stations, channels, eq_time):
 
 def make_region(lon0, lat0, dlat=2.5, aspect=1.0, max_ratio=10):
     """
+    lon0: central longitude
+    lat0: central latitude 
     dlat:      half-height of the region in degrees latitude
     aspect:    desired width/height of the region on the map (1 = square)
     max_ratio: cap on dlon/dlat so the region doesn't explode near the poles
@@ -321,6 +354,18 @@ def make_region(lon0, lat0, dlat=2.5, aspect=1.0, max_ratio=10):
 #---------------------------------------------
 
 def exceedance_episodes(data, dt, threshold, max_gap=2.0, min_count=3):
+    '''
+    Find places in time where the data has exceeded a threshold
+
+    data: trace data
+    dt: sampling rate
+    threshold: threshold of exceedance to check for
+    max_gap: max number of seconds between exceedance times
+    min_count: minimum number of counts for it to count as an episode
+
+    Returns:
+    episode
+    '''
     idx = np.where(np.abs(data) > threshold)[0]
     if idx.size == 0:
         return []
@@ -388,32 +433,38 @@ def check_mmi(percent_g):
 
 
 def calculate_shaking(st2, inv, p_arrival, eq_time):
+    '''
+    Calculate shaking episodes of diffeent MMIs
+
+    st2: Obspy stream
+    inv: obspy inventory with reponse information
+
+    '''
 
     st = st2.copy()
+    #Convert to acceleration
     st.remove_response(inventory=inv, output="ACC")
-    #st.detrend('demean')
+    st.detrend('demean')
     #st.filter('bandpass')
     #st.filter("lowpass", freq=10,  #0.001
                 #corners=2, zerophase=True)
 
+    #Establish thresholds for shaking and corresponding MMIs
     thresholds = [0.17, 1.4, 3.9, 9.2, 18, 34, 65, 124]
     mmi = [3, 4, 5, 6, 7, 8, 9, 10]
+
     df_list = []
-    
+
     #st = st_av + st_av2
     for i in range(len(st)):
         tr1 = st[i]
-        #print('Starting', tr1.stats.station)
-
         #Slice trace so that it is only looking at real signal--------------
         start = UTCDateTime(eq_time) + p_arrival[i] - 10 #ten seconds before p-arrival
-        end = start + 10+ 5*60 #two minutes after p_arrival
-
+        end = start + 10+ 3*60 #three minutes after p_arrival
         tr = tr1.slice(starttime=start, endtime=end)
 
         #temp_data = np.abs((tr.data/9.8)*100) #new version
-        temp_data = (tr.data/9.8)*100 #old version
-        #temp_data = temp_data[:-3000]
+        temp_data = (tr.data/9.8)*100 #not absolute because exceedance looks at up and down
 
         #Loop through MMI thresholds-------------
         start_list = [] #start for each MMI
@@ -444,7 +495,7 @@ def calculate_shaking(st2, inv, p_arrival, eq_time):
 
         for k in range(len(thresholds)):
             episodes = exceedance_episodes(temp_data, tr.stats.delta, thresholds[k],
-                                        max_gap=2.0, min_count=5)
+                                        max_gap=40.0, min_count=2)
             if not episodes:
                 start_list.append(0)
                 end_list.append(0)
@@ -460,8 +511,8 @@ def calculate_shaking(st2, inv, p_arrival, eq_time):
         # Find indices where condition is met
             station_list.append(tr.stats.station)
             channel_list.append(tr.stats.channel)
-            max_shaking.append(np.max(temp_data))
-            max_mmi.append(check_mmi(np.max(temp_data)))
+            max_shaking.append(np.max(np.abs(temp_data)))
+            max_mmi.append(check_mmi(np.max(np.abs(temp_data))))
 
         data = {
                 'station': station_list,
@@ -490,6 +541,9 @@ def make_profile(start, end, half_width_km=30):
     start, end: (lon, lat) of profile endpoints (A and A')
     Returns project(lons, lats) -> (along_km, perp_km), profile length (km),
     and the swath outline as lon/lat arrays.
+    start = lon1, lat1, start of profile
+    end = lon2, lat2, end of profile
+    half_width_km: width of area to search over
     """
     geod = Geod(ellps='WGS84')
     lon1, lat1 = start
