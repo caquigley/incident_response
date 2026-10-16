@@ -32,38 +32,40 @@ python incident_plots.py ak0216xu2rod
 #----------STEP 1: INPUTS-----------------------------------
 #############################################################
 
-'''
+
 #Put in event ID
 if len(sys.argv) > 1:
     event_id = sys.argv[1]
+    MMI_plot = sys.argv[2]
     print(f"Event ID for analysis: {event_id}")
 else:
     print("No input provided, need event ID to run")
-'''
-event_id = 'us6000rsy1' #'aka2026ukynnb' 5.6 today, #'us7000asvb' 7.8 Sandpoint #'us7000qd1y' 2025 Sandpoint #'ak018fcnsk91' #(2018 Anchorage), 'ak01613v15nv' (2016 Iniskin) #'us6000tz1y' (Australia) #'us7000ti1p' (M6.5 Rat islands) # 'aka2026tuxgky' (5.5)  us6000tza4 (Rat islands),  us6000u18k (Panama)
+
+#event_id = 'us6000rsy1' #'aka2026ukynnb' 5.6 today, #'us7000asvb' 7.8 Sandpoint #'us7000qd1y' 2025 Sandpoint #'ak018fcnsk91' #(2018 Anchorage), 'ak01613v15nv' (2016 Iniskin) #'us6000tz1y' (Australia) #'us7000ti1p' (M6.5 Rat islands) # 'aka2026tuxgky' (5.5)  us6000tza4 (Rat islands),  us6000u18k (Panama)
 
 #What plots to make
 plot_map = True
 plot_cross_section = True
-plot_mmi = True
 plot_accelerations = True
+plot_mmi = True
+
 
 #Inputs for reading in event----------------
 event_id  = str(event_id)
 lat = '61.218056' #Anchorage latitude
 lon = '-149.900278' #Anchorage longitude
 max_rad = '4000' #circle that covers all of Alaska, 19000 for globe
-min_mag = '7.0' #min mag to search over
+min_mag = '5.0' #min mag to search over
 event_loc = 'Alaska' #Alaska, Global
 start = str(UTCDateTime.now() - (60*60*24*365)*10) #pull events from last ten years
 end = str(UTCDateTime.now())
 
 #Inputs for stations-------------------
-max_rad_stations = 400 #radius of circle to search for stations from in km
+max_rad_stations = 300 #radius of circle to search for stations from in km
 subset_dist = 200 #radius of circle of stations subset from original list
     
 #Inputs for accelrations plot---------------
-MMI_plot = 4 #MMI of plot to be used
+MMI_plot = int(MMI_plot) #MMI of plot to be used
 
 #Historical inputs--------
 max_rad_hist = '600'
@@ -382,12 +384,12 @@ if __name__ == "__main__":
             depth = hist_df["depth"].values
             mag = hist_df["magnitude"].values
             depth_colors = np.where(depth < 35, 'whitesmoke',#"firebrick",
-                            np.where(depth < 100, "darkgray","dimgrey"))#"gold", "#4a0010"))
+                            np.where(depth < 100, "mediumslateblue","slateblue"))#"gold", "#4a0010"))
             alphas = np.where(mag >= 4.5, 0.8, 0.25)   # 0.25fade small events; adjust to taste
             face = [to_rgba(c, a) for c, a in zip(depth_colors, alphas)]
             edge = [to_rgba("k", a) for a in alphas]
 
-            ax.scatter(hist_df["longitude"], hist_df["latitude"], s=3 * 2**mag,
+            ax.scatter(hist_df["longitude"], hist_df["latitude"], s=1.5 * 2**mag,
                     c=face, edgecolors=edge, linewidths=0.8,
                     transform=PC, zorder=3)
 
@@ -402,7 +404,7 @@ if __name__ == "__main__":
             face = [to_rgba(c, a) for c, a in zip(depth_colors, alphas)]
             edge = [to_rgba("k", a) for a in alphas]
 
-            ax.scatter(aftershock_df["longitude"], aftershock_df["latitude"], s=3 * 2**mag,
+            ax.scatter(aftershock_df["longitude"], aftershock_df["latitude"], s=1.5 * 2**mag,
                     c=face, edgecolors=edge, linewidths=0.8,
                     transform=PC, zorder=6)
 
@@ -410,7 +412,19 @@ if __name__ == "__main__":
         if event_loc == 'Alaska': #only have faults for alaska for now...
             ax.add_geometries(gdf.geometry, crs=ccrs.PlateCarree(),
                             facecolor='none', edgecolor='saddlebrown', #dimgrey
-                            alpha=0.8, linewidth=1.5, zorder=2)
+                            alpha=0.9, linewidth=1.5, zorder=2)
+            # Plot towns-------------------------
+            for i in range(len(towns_filt)):
+                town_lon = towns_filt['lon'].values[i]
+                town_lat = towns_filt['lat'].values[i]
+                town_name = towns_filt['name'].values[i]
+                ax.scatter(town_lon, town_lat, marker="s", s=80,
+                                c="navy", edgecolors="k", linewidths=1.0, 
+                                transform=PC, zorder=4)
+                ax.text(town_lon, town_lat - 0.05, town_name, fontsize=8, transform = PC,
+                            fontname = 'Arial', va = 'top', #edgecolor = 'black',
+                            ha = 'center', color = 'black', fontweight = 'bold',
+                            zorder = 20)
 
         #Plot earthquake-----------------------
         ax.scatter(eq_lon, eq_lat, s = 1000, color = 'red', edgecolors='black', 
@@ -422,18 +436,7 @@ if __name__ == "__main__":
                 c="gray", edgecolors="k", linewidths=1.0, 
                 transform=PC, zorder=3)
 
-        # Plot towns-------------------------
-        for i in range(len(towns_filt)):
-            town_lon = towns_filt['lon'].values[i]
-            town_lat = towns_filt['lat'].values[i]
-            town_name = towns_filt['name'].values[i]
-            ax.scatter(town_lon, town_lat, marker="s", s=80,
-                            c="navy", edgecolors="k", linewidths=1.0, 
-                            transform=PC, zorder=4)
-            ax.text(town_lon, town_lat - 0.05, town_name, fontsize=8, transform = PC,
-                        fontname = 'Arial', va = 'top', #edgecolor = 'black',
-                        ha = 'center', color = 'black', fontweight = 'bold',
-                        zorder = 20)
+        
         
         #Handle legend inputs----------------
         if plot_historical == True:
@@ -650,7 +653,7 @@ if __name__ == "__main__":
             face = [to_rgba(c, a) for c, a in zip(depth_colors, alphas)]
             edge = [to_rgba("k", a) for a in alphas]
 
-            ax.scatter(aftershock_df["longitude"], aftershock_df["latitude"], s=3 * 2**mag,
+            ax.scatter(aftershock_df["longitude"], aftershock_df["latitude"], s=1.5 * 2**mag,
                     c=face, edgecolors=edge, linewidths=0.8,
                     transform=PC, zorder=6)
             
@@ -658,7 +661,7 @@ if __name__ == "__main__":
         if event_loc == 'Alaska': #only have faults for alaska for now...
             ax.add_geometries(gdf.geometry, crs=ccrs.PlateCarree(),
                             facecolor='none', edgecolor='saddlebrown', #dimgrey
-                            alpha=0.8, linewidth=1.5, zorder=2)
+                            alpha=0.9, linewidth=1.5, zorder=2)
 
         #Plot earthquake-----------------------
         ax.scatter(eq_lon, eq_lat, s = 800, color = 'red', edgecolors='black', 
@@ -871,6 +874,11 @@ if __name__ == "__main__":
         ax.text(0.02, 0.98, date_str + ' M' + str(eq_mag), transform=ax.transAxes,
                 fontsize=17, va='top', ha='left', fontweight='bold', fontname='Arial',
                 bbox=dict(facecolor='white', alpha=1.0, edgecolor='black'), zorder=20)
+        
+        ax.text(0.02, 0.90, 'Circles show M3+ historical seismicity since 2000', transform=ax.transAxes,
+                fontsize=10, va='top', ha='left', fontweight = 'bold', style = 'italic',
+                fontname = 'Arial', color = 'black', zorder = 20,
+                bbox=dict(facecolor='white', alpha=0.6))
 
         #Connect top and bottom figures
         fig.canvas.draw()                     # forces cartopy to apply its aspect ratio
@@ -899,8 +907,40 @@ if __name__ == "__main__":
             plot_historical = False
         
         dlat = 2.5
-        num_streams = 5 #5
-        dist_sep = 20
+        num_streams = 4 #5
+        dist_sep = 30
+
+        dist_tol = 40   # km: how far from a target distance a station may be and still count
+
+        dist_targets = [min_dist + i * dist_sep for i in range(num_streams)]
+
+        # One row per station, flagged by whether it recorded any shaking
+        stations = available_stations.drop_duplicates(subset='station').copy()
+        stations['has_shaking'] = stations['max_duration'].fillna(0) > 0
+
+        selected = []
+        used = set()
+        for target in dist_targets:
+            cand = stations[~stations['station'].isin(used)].copy()
+            if cand.empty:
+                break
+            cand['dist_err'] = (cand['distance'] - target).abs()
+
+            # Tiers, tried in order; the first non-empty one wins
+            tiers = [
+                cand[cand['has_shaking'] & (cand['dist_err'] <= dist_tol)],  # shaking, close to target
+                cand[cand['dist_err'] <= dist_tol],                          # any station, close to target
+                cand[cand['has_shaking']],                                   # shaking, but far from target
+                cand,                                                        # anything left
+            ]
+            pool = next(t for t in tiers if not t.empty)
+
+            best = pool.loc[pool['dist_err'].idxmin()].copy()
+            best['target'] = target
+            selected.append(best)
+            used.add(best['station'])
+
+        plot_stations = pd.DataFrame(selected).reset_index(drop=True)
 
         '''
         #Prioritize stations that have shaking recorded
@@ -910,7 +950,7 @@ if __name__ == "__main__":
             available_stations_filt = temp
         '''
     # Find stations with adequate distance seperation-------------------
-        
+        '''
         dist_targets = []
         for i in range(num_streams):
             dist_targets.append(min_dist + i*dist_sep)
@@ -926,7 +966,8 @@ if __name__ == "__main__":
             direction='nearest'
         )
         plot_stations = plot_stations.drop_duplicates(subset=['station'])
-        
+        '''
+
         '''
         Option to have a weighted choosing of stations, based on proximity to town and distance
         towns_filt = pd.DataFrame(towns[towns['distance_deg'] < dlat + 0.5])
@@ -996,7 +1037,7 @@ if __name__ == "__main__":
 
             ax.add_geometries(gdf.geometry, crs=ccrs.PlateCarree(),
                             facecolor='none', edgecolor='saddlebrown', #dimgrey
-                            alpha=0.8, linewidth=1.5, zorder=2)
+                            alpha=0.9, linewidth=1.5, zorder=2)
 
         #Plot earthquake-----------------------
         ax.scatter(eq_lon, eq_lat, s = 1000, color = 'red', edgecolors='black', 
@@ -1265,7 +1306,7 @@ if __name__ == "__main__":
 
             ax.add_geometries(gdf.geometry, crs=ccrs.PlateCarree(),
                             facecolor='none', edgecolor='saddlebrown', #dimgrey
-                            alpha=0.8, linewidth=1.5, zorder=2)
+                            alpha=0.9, linewidth=1.5, zorder=2)
 
         #Plot earthquake-----------------------
         ax.scatter(eq_lon, eq_lat, s = 1000, color = 'red', edgecolors='black', 
