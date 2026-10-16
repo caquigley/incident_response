@@ -1,9 +1,6 @@
-#import yaml
-import sys
-import os
+
 
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 from obspy import UTCDateTime
@@ -16,20 +13,14 @@ from obspy import Stream
 from obspy.clients.fdsn.header import FDSNNoDataException
 from obspy import Inventory
 
-import matplotlib.ticker as mticker
+
 from matplotlib.colors import LightSource, to_rgba
-from matplotlib.patches import Rectangle
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
-from cartopy.geodesic import Geodesic
 import pygmt  # only used to grab the relief grid; any xarray grid (ETOPO, GEBCO) works
-import tempfile
 from matplotlib.lines import Line2D
-import geopandas as gpd
 import matplotlib.image as mpimg
-from matplotlib.colors import ListedColormap, BoundaryNorm
 from pyproj import Geod, Proj
-import matplotlib.patheffects as pe
 
 
 
@@ -438,6 +429,8 @@ def calculate_shaking(st2, inv, p_arrival, eq_time):
 
     st2: Obspy stream
     inv: obspy inventory with reponse information
+    p_arrival: list of estimated p-arrivals for each station
+    eq_time: origin time of earthquake
 
     '''
 
@@ -460,7 +453,7 @@ def calculate_shaking(st2, inv, p_arrival, eq_time):
         tr1 = st[i]
         #Slice trace so that it is only looking at real signal--------------
         start = UTCDateTime(eq_time) + p_arrival[i] - 10 #ten seconds before p-arrival
-        end = start + 10+ 3*60 #three minutes after p_arrival
+        end = start + 10+ 4*60 #three minutes after p_arrival
         tr = tr1.slice(starttime=start, endtime=end)
 
         #temp_data = np.abs((tr.data/9.8)*100) #new version
@@ -574,3 +567,170 @@ def make_profile(start, end, half_width_km=30):
     swath_lon, swath_lat = proj(x, y, inverse=True)
 
     return project, L / 1000, swath_lon, swath_lat
+
+
+#---------------------------------------------
+#--------FUNCTIONS FOR PLOT HELP----------
+#---------------------------------------------
+
+
+
+
+
+def add_inset_map(ax, event_loc, eq_lon, eq_lat, region,
+                  bounds=(0.75, 0.8, 0.25, 0.30)):
+    """Add a locator inset to `ax` with a red box showing `region`.
+
+    region = (left, right, bottom, top) in degrees lon/lat.
+    Returns the inset axes, or None if event_loc isn't recognized.
+    """
+    left, right, bottom, top = region
+
+    if event_loc == 'Global':
+        ax_in = ax.inset_axes(list(bounds),
+                              projection=ccrs.Orthographic(central_longitude=eq_lon,
+                                                           central_latitude=eq_lat))
+        ax_in.set_global()
+        ax_in.add_feature(cfeature.OCEAN, facecolor='lightsteelblue')
+        ax_in.add_feature(cfeature.LAND, facecolor='0.9')
+        ax_in.coastlines(resolution='110m', linewidth=0.5)
+        ax_in.gridlines(linewidth=0.3, color='gray', alpha=0.6)
+
+    elif event_loc == 'Alaska':
+        ANCHORAGE = (-149.900278, 61.218056)   # center the map on anchorage lon/lat
+        anc_lon, anc_lat = ANCHORAGE
+        ax_in = ax.inset_axes(list(bounds),
+                              projection=ccrs.Orthographic(central_longitude=anc_lon,
+                                                           central_latitude=anc_lat))
+        ax_in.set_extent([-190, -135, 50, 70], crs=ccrs.PlateCarree())
+        ax_in.add_feature(cfeature.LAND, facecolor='0.9')
+        ax_in.add_feature(cfeature.OCEAN, facecolor='lightsteelblue')
+        ax_in.coastlines(resolution='50m', linewidth=0.5)
+        ax_in.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.6,
+                          edgecolor='k', zorder=2)
+    else:
+        print(f"add_inset_map: unknown event_loc '{event_loc}', skipping inset.")
+        return None
+
+    # Box showing the extent of the main map
+    box_lons = [left, right, right, left, left]
+    box_lats = [bottom, bottom, top, top, bottom]
+    ax_in.plot(box_lons, box_lats, color='red', linewidth=1.5,
+               transform=ccrs.Geodetic())
+
+    ax_in.set_zorder(10)   # keep it above the relief and scatter layers
+    return ax_in
+
+
+def legend_handles():
+    #Create handles for legend plotting------------------------
+
+    # Depth handles historical
+    depth_handles_hist = [
+        Line2D([], [], marker='o', linestyle='', markersize=9,
+            markerfacecolor='whitesmoke', markeredgecolor='k', label='< 35 km'), 
+        Line2D([], [], marker='o', linestyle='', markersize=9,
+            markerfacecolor='mediumslateblue', markeredgecolor='k',label='35-100 km'), #darkgray
+        Line2D([], [], marker='o', linestyle='', markersize=9,
+            markerfacecolor="darkslateblue", markeredgecolor='k', label='> 100 km'), #dimgrey
+    ]
+
+    # Depth handles aftershocks
+    depth_handles_aftershocks = [
+        Line2D([], [], marker='o', linestyle='', markersize=9,
+                    markerfacecolor='firebrick', markeredgecolor='k', label='< 35 km'),
+        Line2D([], [], marker='o', linestyle='', markersize=9,
+                    markerfacecolor='gold', markeredgecolor='k',label='35-100 km'),
+        Line2D([], [], marker='o', linestyle='', markersize=9,
+                    markerfacecolor='#4a0010', markeredgecolor='k', label='> 100 km'),
+            ]
+
+    # Magnitude (size) entries: markersize is in points, scatter's s is points^2
+    mag_handles = [
+        Line2D([], [], marker='o', linestyle='', markerfacecolor='lightgray',
+            markeredgecolor='k', markersize=np.sqrt(3 * 2**m), label=f'M{m}')
+        for m in (4, 6, 7)
+    ]
+
+    #Fault handle
+    fault_handle = Line2D([], [], linestyle='-', linewidth=2,
+                    color='saddlebrown', label='faults')
+
+    # Station handles
+    sta_handle = Line2D([], [], marker='v', linestyle='', markersize=12,
+                        markerfacecolor='gray', markeredgecolor='k',
+                        markeredgewidth=1.5, label='seismic stations')
+
+    sta_handle2 = Line2D([], [], marker='v', linestyle='', markersize=12,
+                        markerfacecolor='firebrick', markeredgecolor='k',
+                        markeredgewidth=1.5, label='plotted stations')
+    return (depth_handles_hist, depth_handles_aftershocks, mag_handles, 
+            fault_handle, sta_handle, sta_handle2)
+
+
+
+# Approximate grid cell size in meters at each pygmt resolution (for hillshade)
+CELL_M = {'15s': 463, '30s': 926, '01m': 1852, '02m': 3704, '05m': 9260}
+
+
+def add_basemap(fig, subplotspec, eq_lon, eq_lat, dlat,
+                resolution='15s', vert_exag=10, ocean_rgb=(0.80, 0.83, 0.87)):
+    """Create a Mercator map axes centered on the event with shaded relief,
+    coastlines, and borders.
+
+    Returns (ax, region) where region = (left, right, bottom, top).
+    """
+    region = make_region(eq_lon, eq_lat, dlat=dlat)   # import or define make_region in this file
+    PC = ccrs.PlateCarree()
+
+    ax = fig.add_subplot(subplotspec, projection=ccrs.Mercator(central_longitude=eq_lon))
+    ax.set_extent(region, crs=PC)
+
+    # Relief data
+    grid = pygmt.datasets.load_earth_relief(resolution=resolution, region=region,
+                                            registration=None, data_source='igpp',
+                                            use_srtm=False).sortby('lat')
+    elev = grid.values
+    lon, lat = grid.lon.values, grid.lat.values
+
+    # Hillshade
+    cell = CELL_M[resolution]
+    dx = cell * np.cos(np.deg2rad(lat.mean()))
+    shade = LightSource(azdeg=315, altdeg=45).hillshade(elev, vert_exag=vert_exag,
+                                                        dx=dx, dy=cell)
+    base = np.ones(elev.shape + (3,))
+    base[elev < 0] = ocean_rgb
+    rgb = base * (0.55 + 0.45 * shade)[..., None]
+
+    ax.imshow(rgb, origin='lower',
+              extent=[lon.min() - eq_lon, lon.max() - eq_lon, lat.min(), lat.max()],
+              transform=ccrs.PlateCarree(central_longitude=eq_lon),
+              zorder=0, regrid_shape=2000, interpolation='nearest')
+
+    ax.coastlines(resolution='10m', linewidth=0.6, zorder=1)
+    ax.add_feature(cfeature.BORDERS.with_scale('10m'), linewidth=1.5, zorder=1)
+
+    #Specify gridlines and labels------------
+    gl = ax.gridlines(draw_labels=True, crs=PC, linewidth=0)   # linewidth=0 -> no grid lines
+    gl.top_labels = True
+    gl.bottom_labels = False
+    gl.right_labels = False
+
+    #Add logo--------
+    # Preserve the logo's aspect ratio
+    #Read in logo---------------------------------
+    print('Reading in logo file')
+    logo = mpimg.imread('./logos/EC_black_with_rectangle.png')
+    h, w = logo.shape[:2]
+    logo_width = 0.25                                  # fraction of the map's width
+    fig_w, fig_h = fig.get_size_inches()
+    map_pos = ax.get_position()                        # after your canvas.draw() step
+    map_aspect = (map_pos.height * fig_h) / (map_pos.width * fig_w)
+    logo_height = logo_width * (h / w) / map_aspect    # height in axes fraction
+
+    ax_logo = ax.inset_axes([0.0, 0.0, logo_width, logo_height])
+    ax_logo.imshow(logo)
+    ax_logo.axis('off')
+    ax_logo.set_zorder(10)
+
+    return ax, region
