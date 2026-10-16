@@ -1,0 +1,25 @@
+name: incident_plots
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - scipy
+  - xarray            
+  - netcdf4           
+  - obspy
+  - cartopy
+  - geopandas         
+  - pyogrio           
+  - shapely
+  - pyproj            
+  - pygmt             
+  - gmt               
+  - matplotlib
+  - pillow            
+  - requests          
+  - ipykernel
+  - jupyter
