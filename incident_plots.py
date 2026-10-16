@@ -655,7 +655,7 @@ if __name__ == "__main__":
 
             ax.scatter(aftershock_df["longitude"], aftershock_df["latitude"], s=1.5 * 2**mag,
                     c=face, edgecolors=edge, linewidths=0.8,
-                    transform=PC, zorder=6)
+                    transform=PC, zorder=30)
             
         #Plot faults-----------------
         if event_loc == 'Alaska': #only have faults for alaska for now...
@@ -807,7 +807,7 @@ if __name__ == "__main__":
                             edgecolor='none', zorder=2, label='North American Plate')
             ax_xs.plot(xs_f, np.where(b_f >= z0, z0, np.nan),
                     color='k', linewidth=2, zorder=10)
-
+            '''
             #Extend left and right side if the data ends early
             x1, y1 = extend_left(centers, lo)
             x2, y2 = extend_left(centers + 40, lo + 35)
@@ -821,7 +821,25 @@ if __name__ == "__main__":
                     zorder=2, label='Pacific Plate')
             ax_xs.plot(x1, y1, color='k', linewidth=2, zorder=10)
             ax_xs.plot(x2, y2, color='k', linewidth=2, zorder=10)
+            '''
+            # Top and bottom surfaces of the Pacific plate, starting where Slab 2.0 data start
+            x1, y1 = centers, lo
+            x2, y2 = centers + 40, lo + 35
 
+            # Only extend flat to the right if the data end at the shallow (ocean) side
+            if ocean_side:
+                x1, y1 = extend_right(x1, y1, x_end)
+                x2, y2 = extend_right(x2, y2, x_end)
+
+            ax_xs.fill(np.r_[x1, x2[::-1]], np.r_[y1, y2[::-1]],
+                    facecolor='steelblue', alpha=0.3, edgecolor='none',
+                    zorder=2, label='Pacific Plate')
+            ax_xs.plot(x1, y1, color='k', linewidth=2, zorder=10)
+            ax_xs.plot(x2, y2, color='k', linewidth=2, zorder=10)
+
+            # Dotted line closing the plate where the Slab 2.0 data end on the left
+            ax_xs.plot([x1[0], x2[0]], [y1[0], y2[0]],
+                    color='k', linewidth=2, linestyle=':', zorder=10)
             # Ocean only where the plate was extended past the slab data
             if ocean_side and centers[-1] < x_end:
                 ax_xs.fill_between([centers[-1], x_end], 0, lo[-1],
