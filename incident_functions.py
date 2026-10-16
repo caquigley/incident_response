@@ -648,7 +648,7 @@ def legend_handles():
     # Magnitude (size) entries: markersize is in points, scatter's s is points^2
     mag_handles = [
         Line2D([], [], marker='o', linestyle='', markerfacecolor='lightgray',
-            markeredgecolor='k', markersize=np.sqrt(3 * 2**m), label=f'M{m}')
+            markeredgecolor='k', markersize=np.sqrt(1.5 * 2**m), label=f'M{m}')
         for m in (4, 6, 7)
     ]
 
